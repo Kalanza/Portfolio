@@ -1,0 +1,500 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if profile %}{{ profile.name }} - Portfolio{% else %}Portfolio{% endif %}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{% if profile %}{{ profile.bio|truncatewords:30 }}{% else %}Portfolio website showcasing projects and skills{% endif %}">
+    <meta name="keywords" content="{% if profile %}{{ profile.title }}, developer, portfolio, projects{% endif %}">
+    <meta name="author" content="{% if profile %}{{ profile.name }}{% endif %}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:title" content="{% if profile %}{{ profile.name }} - Portfolio{% else %}Portfolio{% endif %}">
+    <meta property="og:description" content="{% if profile %}{{ profile.bio|truncatewords:30 }}{% endif %}">
+    {% if profile.profile_image %}
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ profile.profile_image.url }}">
+    {% endif %}
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+    <meta property="twitter:title" content="{% if profile %}{{ profile.name }} - Portfolio{% else %}Portfolio{% endif %}">
+    <meta property="twitter:description" content="{% if profile %}{{ profile.bio|truncatewords:30 }}{% endif %}">
+    {% if profile.profile_image %}
+    <meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ profile.profile_image.url }}">
+    {% endif %}
+    
+    <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="app">
+        {% if profile %}
+        <!-- Header Section -->
+        <header class="header">
+            <!-- Profile Image -->
+            <div class="profile-image-container">
+                <div class="profile-image-glow"></div>
+                {% if profile.profile_image_url %}
+                <img src="{{ profile.profile_image_url }}" alt="{{ profile.name }}" class="profile-image">
+                {% elif profile.profile_image %}
+                <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}" class="profile-image">
+                {% else %}
+                <img src="{% static 'portfolio/images/profile.jpg' %}" alt="{{ profile.name }}" class="profile-image">
+                {% endif %}
+            </div>
+
+            <!-- Header Content -->
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>{{ profile.name }}</h1>
+                    <p class="subtitle">{{ profile.title }}</p>
+                    <p class="bio">{{ profile.bio }}</p>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="contact-row">
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="4" width="20" height="16" rx="2" class="icon-mail"/>
+                                <path d="M2 7L12 13L22 7" class="icon-mail"/>
+                            </svg>
+                            <span>{{ profile.email }}</span>
+                        </div>
+
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M22 16.92V19.92C22 20.92 21 22 20 22C9 22 2 15 2 4C2 3 3 2 4 2H7C8 2 9 3 9 4C9 5 9.5 6 10 7L8.5 8.5C9.5 10.5 11.5 12.5 13.5 13.5L15 12C16 12.5 17 13 18 13C19 13 20 14 20 15V18" class="icon-phone"/>
+                            </svg>
+                            <span>{{ profile.phone }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="social-links">
+                        {% if profile.linkedin_url %}
+                        <a href="{{ profile.linkedin_url }}" target="_blank" class="social-link">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="2" width="20" height="20" rx="2" class="icon-social"/>
+                                <path d="M8 11V16" class="icon-social"/>
+                                <path d="M8 8V8.01" class="icon-social"/>
+                                <path d="M12 16V11" class="icon-social"/>
+                                <path d="M16 16V13C16 11.5 15 11 14 11C13 11 12 11.5 12 13" class="icon-social"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+                        
+                        {% if profile.github_url %}
+                        <a href="{{ profile.github_url }}" target="_blank" class="social-link">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M9 19C4 20.5 4 16.5 2 16M16 22V18.13C16 17 16.5 16 17 15C13.5 14.5 10 13.5 10 8C10 6.5 10.5 5 11.5 4C11 2.5 11.5 1 11.5 1C11.5 1 13 1 14.5 2.5C16 2 17.5 2 19 2C20.5 2 22 2 23.5 3.5C23.5 3.5 24 5 23.5 6.5C24.5 7.5 25 9 25 10.5C25 16 21.5 17 18 17.5C18.5 18 19 19 19 20.13V24" class="icon-social"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </header>
+        {% endif %}
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Technical Skills Section -->
+        <section class="section">
+            <div class="section-header">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="6" r="4" class="icon-section"/>
+                    <path d="M20 17.5C20 19.985 20 22 12 22C4 22 4 19.985 4 17.5C4 15.015 7.582 13 12 13C16.418 13 20 15.015 20 17.5Z" class="icon-section"/>
+                </svg>
+                <h2>Technical Skills</h2>
+            </div>
+
+            <div class="skills-container">
+                {% for category in skill_categories %}
+                <div class="skill-category">
+                    <h3 class="category-title">
+                        {% if category.icon %}<i class="{{ category.icon }}"></i>{% endif %}
+                        {{ category.name }}
+                    </h3>
+                    <div class="skills-grid">
+                        {% for skill in category.skills.all %}
+                        <span class="badge" title="Proficiency: {{ skill.proficiency }}%">
+                            {{ skill.name }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% empty %}
+                <div class="skills-grid">
+                    <span class="badge">Python</span>
+                    <span class="badge">Django</span>
+                    <span class="badge">FastAPI</span>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Featured Projects Section -->
+        <section class="section">
+            <div class="section-header">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <rect x="2" y="6" width="20" height="16" rx="2" class="icon-section"/>
+                    <path d="M12 2V6" class="icon-section"/>
+                    <path d="M8 2V6" class="icon-section"/>
+                    <path d="M16 2V6" class="icon-section"/>
+                </svg>
+                <h2>Featured Projects</h2>
+            </div>
+
+            <div class="projects-grid">
+                {% for project in projects %}
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">{{ project.title }}</h3>
+                    </div>
+
+                    <p class="project-description">{{ project.description }}</p>
+
+                    <div class="project-technologies">
+                        {% for tech in project.technologies.all %}
+                        <span class="tech-badge">{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="project-links">
+                        {% if project.project_url %}
+                        <a href="{{ project.project_url }}" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Live Demo
+                        </a>
+                        {% endif %}
+                        {% if project.github_url %}
+                        <a href="{{ project.github_url }}" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            GitHub
+                        </a>
+                        {% endif %}
+                        {% if project.api_documentation_url %}
+                        <a href="{{ project.api_documentation_url }}" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            API Docs
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                <!-- Default Projects if none exist -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Dynamic Profile Endpoint with External API</h3>
+                        <span class="project-stage">Stage 0</span>
+                    </div>
+                    <p class="project-description">Full-stack e-commerce solution with payment integration and admin dashboard</p>
+                    <div class="project-technologies">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">FastAPI</span>
+                        <span class="tech-badge">HTTPX</span>
+                        <span class="tech-badge">JSON</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">String Analyzer Service</h3>
+                        <span class="project-stage">Stage 1</span>
+                    </div>
+                    <p class="project-description">Machine learning-powered content creation tool that generates marketing copy</p>
+                    <div class="project-technologies">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">FastAPI</span>
+                        <span class="tech-badge">Uvicorn</span>
+                        <span class="tech-badge">Pydantic</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Country Currency & Exchange API</h3>
+                        <span class="project-stage">Stage 2</span>
+                    </div>
+                    <p class="project-description">Collaborative project management tool with real-time updates</p>
+                    <div class="project-technologies">
+                        <span class="tech-badge">FastAPI</span>
+                        <span class="tech-badge">SQLAlchemy</span>
+                        <span class="tech-badge">HTTPX</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">Pydantic</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">DocuLens - Telex AI Agent</h3>
+                        <span class="project-stage">Stage 3</span>
+                    </div>
+                    <p class="project-description">Cross-platform mobile application for tracking workout progress</p>
+                    <div class="project-technologies">
+                        <span class="tech-badge">FastAPI</span>
+                        <span class="tech-badge">Groq LLM</span>
+                        <span class="tech-badge">Async AI requests</span>
+                        <span class="tech-badge">Redis</span>
+                        <span class="tech-badge">Firebase</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Experience Section -->
+        {% if experiences %}
+        <section class="section">
+            <div class="section-header">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="6" width="18" height="15" rx="2" class="icon-section"/>
+                    <path d="M3 10h18M8 6V3M16 6V3" class="icon-section"/>
+                </svg>
+                <h2>Experience</h2>
+            </div>
+
+            <div class="timeline">
+                {% for exp in experiences %}
+                <div class="timeline-item fade-in">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">{{ exp.position }}</h3>
+                        <p class="timeline-subtitle">{{ exp.company }}{% if exp.location %} • {{ exp.location }}{% endif %}</p>
+                        <p class="timeline-date">
+                            {{ exp.start_date|date:"M Y" }} - {% if exp.is_current %}Present{% else %}{{ exp.end_date|date:"M Y" }}{% endif %}
+                        </p>
+                        <p class="timeline-description">{{ exp.description }}</p>
+                        {% if exp.technologies %}
+                        <div class="timeline-tech">
+                            {% for tech in exp.get_technologies_list %}
+                            <span class="tech-badge">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+        {% endif %}
+
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+            <div class="section-header">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" class="icon-section"/>
+                </svg>
+                <h2>Get In Touch</h2>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-info-box">
+                    <h3>Let's Work Together</h3>
+                    <p>I'm currently {% if profile.available_for_hire %}available for hire{% else %}not available for new projects{% endif %}. Feel free to reach out if you want to collaborate on a project or just have a chat!</p>
+                    
+                    <div class="contact-methods">
+                        {% if profile.email %}
+                        <a href="mailto:{{ profile.email }}" class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <span>{{ profile.email }}</span>
+                        </a>
+                        {% endif %}
+                        {% if profile.phone %}
+                        <a href="tel:{{ profile.phone }}" class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <span>{{ profile.phone }}</span>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <form method="POST" class="contact-form">
+                    {% csrf_token %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>{{ profile.name }}</h4>
+                    <p>{{ profile.title }}</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <nav class="footer-nav">
+                        <a href="#" onclick="scrollToTop()">Home</a>
+                        <a href="#contact">Contact</a>
+                        {% if profile.resume_file %}
+                        <a href="{{ profile.resume_file.url }}" download>Resume</a>
+                        {% endif %}
+                    </nav>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="footer-socials">
+                        {% if profile.github_url %}
+                        <a href="{{ profile.github_url }}" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        {% endif %}
+                        {% if profile.linkedin_url %}
+                        <a href="{{ profile.linkedin_url }}" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        {% endif %}
+                        {% if profile.twitter_url %}
+                        <a href="{{ profile.twitter_url }}" target="_blank" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        {% endif %}
+                        {% if profile.stackoverflow_url %}
+                        <a href="{{ profile.stackoverflow_url }}" target="_blank" aria-label="Stack Overflow">
+                            <i class="fab fa-stack-overflow"></i>
+                        </a>
+                        {% endif %}
+                        {% if profile.medium_url %}
+                        <a href="{{ profile.medium_url }}" target="_blank" aria-label="Medium">
+                            <i class="fab fa-medium"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; {{ current_year|default:"2025" }} {{ profile.name }}. All rights reserved.</p>
+                <p>Built with Django & ❤️</p>
+            </div>
+        </footer>
+
+        <!-- Background Blur Effect -->
+        <div class="background-blur"></div>
+    </div>
+
+    <!-- JavaScript for Animations and Theme Toggle -->
+    <script>
+        // Smooth scroll to top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        // Check for saved theme preference or default to 'dark'
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        body.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const theme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            updateThemeIcon(theme);
+        });
+
+        function updateThemeIcon(theme) {
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Intersection Observer for Fade-in Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections and project cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section, .header');
+            sections.forEach(section => {
+                section.classList.add('fade-in');
+                observer.observe(section);
+            });
+
+            // Stagger animation for project cards
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach((card, index) => {
+                card.classList.add('fade-in');
+                card.style.animationDelay = `${index * 0.1}s`;
+                observer.observe(card);
+            });
+
+            // Observe skills for stagger effect
+            const skills = document.querySelectorAll('.badge');
+            skills.forEach((skill, index) => {
+                skill.classList.add('fade-in');
+                skill.style.animationDelay = `${index * 0.03}s`;
+                observer.observe(skill);
+            });
+        });
+    </script>
+</body>
+</html>
