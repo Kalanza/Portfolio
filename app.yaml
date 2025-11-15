@@ -1,0 +1,31 @@
+name: portfolio
+services:
+- name: web
+  github:
+    repo: Kalanza/Portfolio
+    branch: main
+    deploy_on_push: true
+  build_command: chmod +x build.sh && ./build.sh
+  run_command: gunicorn portfolio_site.wsgi --log-file -
+  environment_slug: python
+  instance_size_slug: basic-xxs
+  instance_count: 1
+  http_port: 8080
+  envs:
+  - key: SECRET_KEY
+    scope: RUN_TIME
+    type: SECRET
+  - key: DEBUG
+    value: "False"
+    scope: RUN_TIME
+  - key: ALLOWED_HOSTS
+    value: ".ondigitalocean.app"
+    scope: RUN_TIME
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    type: SECRET
+
+databases:
+- name: db
+  engine: PG
+  production: true
