@@ -5,8 +5,8 @@ services:
     repo: Kalanza/Portfolio
     branch: main
     deploy_on_push: true
-  build_command: chmod +x build.sh && ./build.sh
-  run_command: gunicorn portfolio_site.wsgi --log-file -
+  build_command: pip install -r requirements.txt && python manage.py migrate --no-input && python manage.py collectstatic --no-input
+  run_command: python manage.py populate_data --noinput; gunicorn portfolio_site.wsgi --log-file -
   environment_slug: python
   instance_size_slug: basic-xxs
   instance_count: 1

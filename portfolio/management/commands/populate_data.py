@@ -6,7 +6,19 @@ from portfolio.models import (Profile, SkillCategory, Skill, Project, Technology
 class Command(BaseCommand):
     help = 'Populate the database with sample portfolio data'
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--noinput',
+            action='store_true',
+            help='Skip confirmation prompts',
+        )
+
     def handle(self, *args, **kwargs):
+        # Check if data already exists
+        if Profile.objects.exists() and not kwargs.get('noinput'):
+            self.stdout.write(self.style.WARNING('Data already exists. Skipping population.'))
+            return
+        
         # Clear existing data
         Profile.objects.all().delete()
         SkillCategory.objects.all().delete()
