@@ -1,0 +1,595 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<!-- Hero Section - L-Shape Background Layout -->
+<section id="home" class="relative overflow-hidden" style="height: 95vh; margin: 0 0 5vh 5vh; background: #D2A679; box-shadow: 0 30px 60px rgba(0,0,0,0.3);">
+    
+    <!-- Dark Blue Left Sidebar -->
+    <div class="absolute inset-0" style="background: #0A111F; clip-path: polygon(0 0, 30% 0, 30% 100%, 0 100%); z-index: 0;"></div>
+    
+    <!-- Bottom Dark Border -->
+    <div class="absolute bottom-0 left-0 right-0 h-2" style="background: #0A111F; z-index: 5;"></div>
+
+    <!-- Main Content Layer -->
+    <div class="relative z-10 flex h-full">
+
+        <!-- Left Sidebar: Logo & Navigation -->
+        <div class="relative w-[220px] flex flex-col justify-between text-white z-20" style="padding: 40px 30px;">
+            
+            <!-- Logo -->
+            <div class="flex items-start">
+                <div class="text-[28px] font-[800]">◻</div>
+            </div>
+
+            <!-- Navigation at Bottom -->
+            <nav class="mb-16">
+                <ul class="flex flex-col gap-[18px] text-[11px] tracking-[1.8px] uppercase font-inter" style="color: #d7dce1;">
+                    {% for item in nav_items %}
+                    <li class="hover:text-white cursor-pointer transition-colors duration-300">
+                        <a href="#{{ item|lower|cut:' ' }}">{{ item }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Right Hero Area -->
+        <div class="relative flex-1 flex items-center justify-between z-20" style="padding: 60px 80px;">
+            
+            <!-- Text Block - Overlapping Both Sections -->
+            <div class="text-white" style="position: absolute; left: -100px; top: 50%; transform: translateY(-50%); z-index: 4; max-width: 700px;">
+                <h1 class="font-montserrat font-[800] mb-[32px]" style="font-size: 72px; line-height: 0.95; letter-spacing: -2px;">
+                    {{ user.first_name }}<br>
+                    {{ user.middle_name }}<br>
+                    {{ user.last_name }}
+                </h1>
+                <div class="ml-auto" style="max-width: 420px;">
+                    <p class="font-inter mb-[24px] text-right" style="font-size: 15px; line-height: 1.65; color: #f1f1f1;">
+                        {{ user.role }}<br>
+                        {{ user.tagline }}
+                    </p>
+                    <div class="flex justify-end">
+                        <button class="font-inter uppercase cursor-pointer transition" style="padding: 13px 32px; font-size: 11px; letter-spacing: 1.2px; background: white; border: none; color: #0A111F; border-radius: 25px; font-weight: 600;" onmouseover="this.style.background='#f0f0f0';" onmouseout="this.style.background='white';">
+                            DOWNLOAD CV
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image -->
+            <div class="absolute z-[1] right-8 md:right-12 lg:right-16 bottom-0 w-64 sm:w-72 md:w-80 lg:w-[380px] xl:w-[400px]">
+                <img 
+                    src="{% static 'images/Me.jpeg' %}" 
+                    alt="{{ user.first_name }}" 
+                    class="rounded w-full h-auto object-cover"
+                    style="filter: contrast(1.1) brightness(1.05) saturate(1.1) sharpen(1.2);"
+                >
+            </div>
+
+            <!-- Controls - Outlined Square Buttons -->
+            <div class="absolute flex gap-[10px] z-[5] right-8 bottom-12">
+                <button class="border-2 border-white cursor-pointer font-inter transition" style="width: 40px; height: 40px; background: transparent; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px;" onmouseover="this.style.background='white'; this.style.color='#0A111F';" onmouseout="this.style.background='transparent'; this.style.color='white';">
+                    ←
+                </button>
+                <button class="border-2 border-white cursor-pointer font-inter transition" style="width: 40px; height: 40px; background: transparent; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px;" onmouseover="this.style.background='white'; this.style.color='#0A111F';" onmouseout="this.style.background='transparent'; this.style.color='white';">
+                    →
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<!-- About Me Section - Redesigned -->
+<section id="aboutme" class="relative min-h-screen bg-white py-20 lg:py-32 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-8 lg:px-20">
+        <!-- Section Header with Editorial Number -->
+        <div class="mb-16">
+            <span class="text-primary-light/30 font-montserrat font-bold text-[120px] lg:text-[180px] leading-none absolute top-0 left-0 lg:left-10" style="z-index: 0;">01</span>
+            <h2 class="relative text-5xl lg:text-7xl font-montserrat font-bold text-primary-dark mb-4 pt-20" style="z-index: 1;">About Me</h2>
+            <div class="w-24 h-1 bg-primary-light"></div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-16">
+            <!-- Bio Column -->
+            <div class="lg:col-span-7">
+                <div class="space-y-6">
+                    <p class="text-gray-700 text-lg lg:text-xl leading-relaxed font-inter">
+                        {{ user.bio|linebreaksbr }}
+                    </p>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="grid grid-cols-3 gap-6 mt-12 pt-12 border-t border-gray-200">
+                    <div>
+                        <div class="text-4xl font-montserrat font-bold text-primary-dark mb-2">5+</div>
+                        <div class="text-sm text-gray-600 uppercase tracking-wider">Projects</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-montserrat font-bold text-primary-dark mb-2">2+</div>
+                        <div class="text-sm text-gray-600 uppercase tracking-wider">Years Coding</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-montserrat font-bold text-primary-dark mb-2">100%</div>
+                        <div class="text-sm text-gray-600 uppercase tracking-wider">Committed</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Stack Column -->
+            <div class="lg:col-span-5">
+                <div class="sticky top-24">
+                    <div class="bg-primary-dark p-8 lg:p-10 rounded-lg shadow-2xl">
+                        <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-white mb-8">Core Technologies</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="group">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h4 class="font-semibold text-primary-light text-sm uppercase tracking-wider">Languages & Frameworks</h4>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">Python</span>
+                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">Django</span>
+                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">FastAPI</span>
+                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">DRF</span>
+                                </div>
+                            </div>
+
+                            <div class="group">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h4 class="font-semibold text-primary-light text-sm uppercase tracking-wider">Databases</h4>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">PostgreSQL</span>
+                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">Redis</span>
+                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">MongoDB</span>
+                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">MySQL</span>
+                                </div>
+                            </div>
+
+                            <div class="group">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h4 class="font-semibold text-primary-light text-sm uppercase tracking-wider">DevOps & Cloud</h4>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">Docker</span>
+                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">Kubernetes</span>
+                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">AWS</span>
+                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">GCP</span>
+                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">CI/CD</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience Section - Redesigned with Timeline -->
+<section id="experience" class="relative min-h-screen bg-primary-dark py-20 lg:py-32 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-8 lg:px-20">
+        <!-- Section Header -->
+        <div class="mb-16">
+            <span class="text-white/5 font-montserrat font-bold text-[120px] lg:text-[180px] leading-none absolute top-0 right-0 lg:right-10" style="z-index: 0;">02</span>
+            <h2 class="relative text-5xl lg:text-7xl font-montserrat font-bold text-white mb-4 pt-20" style="z-index: 1;">Experience</h2>
+            <div class="w-24 h-1 bg-primary-light"></div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="relative">
+            <!-- Vertical Line -->
+            <div class="hidden lg:block absolute left-8 top-0 bottom-0 w-0.5 bg-white/20"></div>
+
+            <div class="space-y-12 lg:space-y-16">
+                {% for exp in experiences %}
+                <div class="relative group">
+                    <!-- Timeline Dot -->
+                    <div class="hidden lg:flex absolute left-8 -translate-x-1/2 w-4 h-4 rounded-full bg-primary-light border-4 border-primary-dark group-hover:scale-150 transition-transform duration-300">
+                        {% if exp.current %}
+                        <span class="absolute inset-0 rounded-full bg-primary-light animate-ping opacity-75"></span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Content Card -->
+                    <div class="lg:ml-20 bg-white/5 p-8 lg:p-10 rounded-lg border border-white/10 hover:border-primary-light/50 hover:bg-white/10 transition-all duration-300 hover:translate-x-2">
+                        <!-- Header -->
+                        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-6">
+                            <div class="flex-1">
+                                <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-white mb-2 group-hover:text-primary-light transition-colors">
+                                    {{ exp.position }}
+                                </h3>
+                                <h4 class="text-lg lg:text-xl text-primary-light font-inter">{{ exp.company }}</h4>
+                            </div>
+                            
+                            <div class="flex items-center gap-2">
+                                <span class="px-4 py-2 bg-primary-light/20 text-primary-light text-sm font-semibold rounded-full border border-primary-light/30">
+                                    {{ exp.start_date|date:"M Y" }} - {% if exp.current %}<span class="text-white">Present</span>{% else %}{{ exp.end_date|date:"M Y" }}{% endif %}
+                                </span>
+                                {% if exp.current %}
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 text-xs font-semibold rounded-full border border-green-500/30 flex items-center gap-1">
+                                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                                    Active
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <p class="text-gray-300 text-base lg:text-lg leading-relaxed mb-6 font-inter">
+                            {{ exp.description }}
+                        </p>
+
+                        <!-- Tech Stack -->
+                        <div>
+                            <h5 class="text-xs uppercase tracking-wider text-white/60 mb-3 font-semibold">Technologies Used</h5>
+                            <div class="flex flex-wrap gap-2">
+                                {% for tech in exp.tech_used.split %}
+                                <span class="px-3 py-1.5 bg-primary-light/10 text-primary-light text-sm rounded border border-primary-light/20 hover:bg-primary-light/20 hover:scale-105 transition-all duration-200">
+                                    {{ tech }}
+                                </span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="lg:ml-20 bg-white/5 p-8 rounded-lg border border-white/10">
+                    <p class="text-gray-400 text-center font-inter">Experience data coming soon...</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section - Redesigned with Numbered Cards -->
+<section id="services" class="relative min-h-screen bg-primary-light py-20 lg:py-32 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-8 lg:px-20">
+        <!-- Section Header -->
+        <div class="mb-16">
+            <span class="text-primary-dark/10 font-montserrat font-bold text-[120px] lg:text-[180px] leading-none absolute top-0 left-0 lg:left-10" style="z-index: 0;">03</span>
+            <h2 class="relative text-5xl lg:text-7xl font-montserrat font-bold text-primary-dark mb-4 pt-20" style="z-index: 1;">Services</h2>
+            <div class="w-24 h-1 bg-primary-dark"></div>
+            <p class="text-gray-700 text-lg mt-6 max-w-2xl font-inter">Specialized backend development services focused on building robust, scalable solutions.</p>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {% for service in services %}
+            <div class="group bg-white p-8 lg:p-10 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary-dark relative overflow-hidden">
+                <!-- Number Badge -->
+                <div class="absolute top-6 right-6 w-12 h-12 rounded-full bg-primary-dark/5 flex items-center justify-center group-hover:bg-primary-dark group-hover:scale-110 transition-all duration-300">
+                    <span class="text-primary-dark group-hover:text-white font-montserrat font-bold text-lg">{{ forloop.counter|stringformat:"02d" }}</span>
+                </div>
+                
+                <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-primary-dark mb-4 pr-14 group-hover:text-primary-dark/90 transition-colors">
+                    {{ service.title }}
+                </h3>
+                <p class="text-gray-700 leading-relaxed font-inter">{{ service.description }}</p>
+                
+                <!-- Decorative Element -->
+                <div class="mt-6 w-12 h-1 bg-primary-dark/20 group-hover:w-full group-hover:bg-primary-dark transition-all duration-500"></div>
+            </div>
+            {% empty %}
+            <!-- Default Services -->
+            <div class="group bg-white p-8 lg:p-10 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary-dark relative overflow-hidden">
+                <div class="absolute top-6 right-6 w-12 h-12 rounded-full bg-primary-dark/5 flex items-center justify-center group-hover:bg-primary-dark group-hover:scale-110 transition-all duration-300">
+                    <span class="text-primary-dark group-hover:text-white font-montserrat font-bold text-lg">01</span>
+                </div>
+                <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-primary-dark mb-4 pr-14 group-hover:text-primary-dark/90 transition-colors">
+                    API Development
+                </h3>
+                <p class="text-gray-700 leading-relaxed font-inter">Design and build RESTful APIs with Django REST Framework, implementing authentication, rate limiting, and comprehensive documentation.</p>
+                <div class="mt-6 w-12 h-1 bg-primary-dark/20 group-hover:w-full group-hover:bg-primary-dark transition-all duration-500"></div>
+            </div>
+            
+            <div class="group bg-white p-8 lg:p-10 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary-dark relative overflow-hidden">
+                <div class="absolute top-6 right-6 w-12 h-12 rounded-full bg-primary-dark/5 flex items-center justify-center group-hover:bg-primary-dark group-hover:scale-110 transition-all duration-300">
+                    <span class="text-primary-dark group-hover:text-white font-montserrat font-bold text-lg">02</span>
+                </div>
+                <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-primary-dark mb-4 pr-14 group-hover:text-primary-dark/90 transition-colors">
+                    Database Optimization
+                </h3>
+                <p class="text-gray-700 leading-relaxed font-inter">Optimize PostgreSQL databases for performance, design efficient schemas, implement indexing strategies, and query optimization.</p>
+                <div class="mt-6 w-12 h-1 bg-primary-dark/20 group-hover:w-full group-hover:bg-primary-dark transition-all duration-500"></div>
+            </div>
+            
+            <div class="group bg-white p-8 lg:p-10 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary-dark relative overflow-hidden">
+                <div class="absolute top-6 right-6 w-12 h-12 rounded-full bg-primary-dark/5 flex items-center justify-center group-hover:bg-primary-dark group-hover:scale-110 transition-all duration-300">
+                    <span class="text-primary-dark group-hover:text-white font-montserrat font-bold text-lg">03</span>
+                </div>
+                <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-primary-dark mb-4 pr-14 group-hover:text-primary-dark/90 transition-colors">
+                    Cloud Deployment
+                </h3>
+                <p class="text-gray-700 leading-relaxed font-inter">Deploy scalable applications on AWS/GCP using Docker and Kubernetes, set up CI/CD pipelines, and ensure high availability.</p>
+                <div class="mt-6 w-12 h-1 bg-primary-dark/20 group-hover:w-full group-hover:bg-primary-dark transition-all duration-500"></div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section - Redesigned with Featured Layout -->
+<section id="projects" class="relative min-h-screen bg-white py-20 lg:py-32 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-8 lg:px-20">
+        <!-- Section Header -->
+        <div class="mb-16">
+            <span class="text-gray-100 font-montserrat font-bold text-[120px] lg:text-[180px] leading-none absolute top-0 right-0 lg:right-10" style="z-index: 0;">04</span>
+            <h2 class="relative text-5xl lg:text-7xl font-montserrat font-bold text-primary-dark mb-4 pt-20" style="z-index: 1;">Featured Projects</h2>
+            <div class="w-24 h-1 bg-primary-dark"></div>
+            <p class="text-gray-700 text-lg mt-6 max-w-2xl font-inter">A selection of backend systems and APIs built with modern technologies.</p>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="space-y-8">
+            {% for project in projects %}
+            <!-- Alternating Layout -->
+            <div class="group bg-primary-dark rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 {% if forloop.counter|divisibleby:2 %}flex-row-reverse{% endif %}">
+                <div class="grid lg:grid-cols-2 gap-0">
+                    <!-- Project Image/Icon -->
+                    <div class="relative h-64 lg:h-auto overflow-hidden {% if forloop.counter|divisibleby:2 %}lg:order-2{% endif %}">
+                        {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        {% else %}
+                        <div class="w-full h-full bg-gradient-to-br from-primary-light to-primary-light/80 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 opacity-10">
+                                <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(14,22,33,.2)_25%,rgba(14,22,33,.2)_50%,transparent_50%,transparent_75%,rgba(14,22,33,.2)_75%,rgba(14,22,33,.2))] bg-[length:20px_20px]"></div>
+                            </div>
+                            <span class="text-primary-dark text-8xl font-montserrat font-bold relative z-10">{{ project.title|slice:":1" }}</span>
+                        </div>
+                        {% endif %}
+                        <!-- Project Number Badge -->
+                        <div class="absolute top-6 left-6 w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
+                            <span class="text-primary-dark font-montserrat font-bold text-xl">{{ forloop.counter|stringformat:"02d" }}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Content -->
+                    <div class="p-8 lg:p-12 flex flex-col justify-center {% if forloop.counter|divisibleby:2 %}lg:order-1{% endif %}">
+                        <h3 class="text-3xl lg:text-4xl font-montserrat font-bold text-white mb-4 group-hover:text-primary-light transition-colors">
+                            {{ project.title }}
+                        </h3>
+                        <p class="text-white/80 leading-relaxed mb-6 font-inter">{{ project.description }}</p>
+                        
+                        <!-- Tech Stack Tags -->
+                        <div class="mb-6">
+                            <div class="flex flex-wrap gap-2">
+                                {% for tech in project.tech_stack|split:"," %}
+                                <span class="px-3 py-1 bg-white/10 text-white text-sm rounded-full border border-white/20 font-inter">{{ tech|trim }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        <!-- Project Links -->
+                        <div class="flex gap-4">
+                            {% if project.api_documentation %}
+                            <a href="{{ project.api_documentation }}" target="_blank" class="inline-flex items-center gap-2 bg-primary-light text-primary-dark px-6 py-3 rounded-lg font-semibold hover:bg-white transition-all duration-300 group/btn">
+                                <span>Live Demo</span>
+                                <svg class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                </svg>
+                            </a>
+                            {% endif %}
+                            {% if project.github_link %}
+                            <a href="{{ project.github_link }}" target="_blank" class="inline-flex items-center gap-2 border-2 border-white/30 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-dark transition-all duration-300">
+                                <span>GitHub</span>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Default Projects -->
+            <div class="group bg-primary-dark rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500">
+                <div class="grid lg:grid-cols-2 gap-0">
+                    <div class="relative h-64 lg:h-auto overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-primary-light to-primary-light/80 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 opacity-10">
+                                <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(14,22,33,.2)_25%,rgba(14,22,33,.2)_50%,transparent_50%,transparent_75%,rgba(14,22,33,.2)_75%,rgba(14,22,33,.2))] bg-[length:20px_20px]"></div>
+                            </div>
+                            <span class="text-primary-dark text-8xl font-montserrat font-bold relative z-10">M</span>
+                        </div>
+                        <div class="absolute top-6 left-6 w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
+                            <span class="text-primary-dark font-montserrat font-bold text-xl">01</span>
+                        </div>
+                    </div>
+                    <div class="p-8 lg:p-12 flex flex-col justify-center">
+                        <h3 class="text-3xl lg:text-4xl font-montserrat font-bold text-white mb-4 group-hover:text-primary-light transition-colors">
+                            Movie Review API
+                        </h3>
+                        <p class="text-white/80 leading-relaxed mb-6 font-inter">Comprehensive RESTful API for movie reviews with user authentication, rating system, and advanced search functionality.</p>
+                        <div class="mb-6">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white/10 text-white text-sm rounded-full border border-white/20 font-inter">Django</span>
+                                <span class="px-3 py-1 bg-white/10 text-white text-sm rounded-full border border-white/20 font-inter">DRF</span>
+                                <span class="px-3 py-1 bg-white/10 text-white text-sm rounded-full border border-white/20 font-inter">PostgreSQL</span>
+                                <span class="px-3 py-1 bg-white/10 text-white text-sm rounded-full border border-white/20 font-inter">JWT</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#" target="_blank" class="inline-flex items-center gap-2 bg-primary-light text-primary-dark px-6 py-3 rounded-lg font-semibold hover:bg-white transition-all duration-300 group/btn">
+                                <span>Live Demo</span>
+                                <svg class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                </svg>
+                            </a>
+                            <a href="#" target="_blank" class="inline-flex items-center gap-2 border-2 border-white/30 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-dark transition-all duration-300">
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- View All Button -->
+        <div class="text-center mt-16">
+            <a href="{% url 'portfolio:portfolio' %}" class="inline-flex items-center gap-3 bg-primary-dark text-white px-10 py-5 rounded-lg font-montserrat font-bold text-lg hover:bg-primary-dark/90 hover:scale-105 transition-all duration-300 shadow-lg">
+                <span>VIEW ALL PROJECTS</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section - Redesigned with Split Background -->
+<section id="contactme" class="relative min-h-screen overflow-hidden">
+    <!-- Split Background -->
+    <div class="absolute inset-0" style="z-index: 0;">
+        <div class="absolute inset-0 bg-primary-dark" style="width: 220px;"></div>
+        <div class="absolute inset-0 bg-primary-light" style="margin: 0 0 0 220px;"></div>
+    </div>
+    
+    <div class="relative py-20 lg:py-32 px-8 lg:px-20" style="z-index: 10;">
+        <div class="max-w-6xl mx-auto" style="margin-left: 240px;">
+            <!-- Editorial Number -->
+            <span class="text-primary-dark/20 font-montserrat font-bold text-[120px] lg:text-[200px] leading-none absolute top-0 left-0 lg:left-10">05</span>
+            
+            <div class="relative grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Left Content -->
+                <div class="text-center lg:text-left">
+                    <h2 class="relative text-5xl lg:text-7xl font-montserrat font-bold text-primary-dark mb-6 pt-16 lg:pt-20">
+                        Let's Build<br/>Together
+                    </h2>
+                    <div class="w-24 h-1 bg-primary-dark mx-auto lg:mx-0 mb-8"></div>
+                    <p class="text-xl lg:text-2xl text-gray-700 leading-relaxed font-inter mb-12">
+                        Open to backend development opportunities and collaborations. Let's create something exceptional.
+                    </p>
+                    
+                    <!-- Quick Stats -->
+                    <div class="grid grid-cols-3 gap-4 mb-12">
+                        <div class="text-center">
+                            <div class="text-4xl font-montserrat font-bold text-primary-dark mb-1">24/7</div>
+                            <div class="text-sm text-gray-600 font-inter">Available</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-montserrat font-bold text-primary-dark mb-1">&lt;24h</div>
+                            <div class="text-sm text-gray-600 font-inter">Response</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-montserrat font-bold text-primary-dark mb-1">100%</div>
+                            <div class="text-sm text-gray-600 font-inter">Remote</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Content - Contact Cards -->
+                <div class="space-y-6">
+                    <!-- Email Card -->
+                    <a href="mailto:kalanzavictor@gmail.com" class="group block bg-primary-dark p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-light">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-14 h-14 rounded-full bg-primary-light flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-7 h-7 text-primary-dark" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-primary-light text-sm font-inter mb-1">Email Address</div>
+                                <div class="text-white text-lg font-montserrat font-semibold">kalanzavictor@gmail.com</div>
+                            </div>
+                            <svg class="w-6 h-6 text-primary-light group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </div>
+                        <p class="text-white/70 text-sm font-inter">Drop me a message about your project</p>
+                    </a>
+                    
+                    <!-- LinkedIn Card -->
+                    <a href="https://www.linkedin.com/in/victor-kalanza-a10a67261" target="_blank" class="group block bg-white p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-dark">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-14 h-14 rounded-full bg-primary-dark flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-gray-600 text-sm font-inter mb-1">Professional Network</div>
+                                <div class="text-primary-dark text-lg font-montserrat font-semibold">LinkedIn Profile</div>
+                            </div>
+                            <svg class="w-6 h-6 text-primary-dark group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </div>
+                        <p class="text-gray-600 text-sm font-inter">Let's connect professionally</p>
+                    </a>
+                    
+                    <!-- GitHub Card -->
+                    <a href="https://github.com/Kalanza" target="_blank" class="group block bg-white p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-dark">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-14 h-14 rounded-full bg-primary-dark flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-gray-600 text-sm font-inter mb-1">Open Source</div>
+                                <div class="text-primary-dark text-lg font-montserrat font-semibold">GitHub Profile</div>
+                            </div>
+                            <svg class="w-6 h-6 text-primary-dark group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </div>
+                        <p class="text-gray-600 text-sm font-inter">Check out my code repositories</p>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="mt-20 pt-8 border-t border-primary-dark/20 text-center">
+                <p class="text-gray-600 text-sm font-inter">
+                    © 2025 Victor Mumo Kalanza. Built with Django & Tailwind CSS.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
+        observer.observe(section);
+    });
+</script>
+{% endblock %}
