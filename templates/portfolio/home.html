@@ -4,10 +4,10 @@
 
 {% block content %}
 <!-- Hero Section - L-Shape Background Layout -->
-<section id="home" class="relative overflow-hidden" style="height: 95vh; margin: 0 0 5vh 5vh; background: #D2A679; box-shadow: 0 30px 60px rgba(0,0,0,0.3);">
+<section id="home" class="relative overflow-hidden" style="height: 100vh; margin: 0; background: #D2A679;" class="sm:h-[95vh] sm:m-[0_0_5vh_5vh] shadow-lg sm:shadow-2xl">
     
     <!-- Dark Blue Left Sidebar -->
-    <div class="absolute inset-0" style="background: #0A111F; clip-path: polygon(0 0, 30% 0, 30% 100%, 0 100%); z-index: 0;"></div>
+    <div class="hidden md:block absolute inset-0" style="background: #0A111F; clip-path: polygon(0 0, 30% 0, 30% 100%, 0 100%); z-index: 0;"></div>
     
     <!-- Bottom Dark Border -->
     <div class="absolute bottom-0 left-0 right-0 h-2" style="background: #0A111F; z-index: 5;"></div>
@@ -16,7 +16,7 @@
     <div class="relative z-10 flex h-full">
 
         <!-- Left Sidebar: Logo & Navigation -->
-        <div class="relative w-[220px] flex flex-col justify-between text-white z-20" style="padding: 40px 30px;">
+        <div class="hidden md:flex relative w-[220px] flex-col justify-between text-white z-20" style="padding: 40px 30px;">
             
             <!-- Logo -->
             <div class="flex items-start">
@@ -36,21 +36,21 @@
         </div>
 
         <!-- Right Hero Area -->
-        <div class="relative flex-1 flex items-center justify-between z-20" style="padding: 60px 80px;">
+        <div class="relative flex-1 flex items-center justify-between z-20" style="padding: 40px 20px;" class="sm:p-[60px_40px] lg:p-[60px_80px]">
             
             <!-- Text Block - Overlapping Both Sections -->
-            <div class="text-white" style="position: absolute; left: -100px; top: 50%; transform: translateY(-50%); z-index: 4; max-width: 700px;">
-                <h1 class="font-montserrat font-[800] mb-[32px]" style="font-size: 72px; line-height: 0.95; letter-spacing: -2px;">
+            <div class="text-white" style="position: relative; z-index: 4; max-width: 700px;" class="md:absolute md:left-[-100px] md:top-1/2 md:transform md:-translate-y-1/2">
+                <h1 class="font-montserrat font-[800] mb-[24px] text-4xl sm:text-5xl md:text-6xl lg:text-7xl" style="line-height: 0.95; letter-spacing: -2px;" class="sm:mb-[32px]">
                     {{ user.first_name }}<br>
                     {{ user.middle_name }}<br>
                     {{ user.last_name }}
                 </h1>
-                <div class="ml-auto" style="max-width: 420px;">
-                    <p class="font-inter mb-[24px] text-right" style="font-size: 15px; line-height: 1.65; color: #f1f1f1;">
+                <div class="ml-0 md:ml-auto" style="max-width: 420px;">
+                    <p class="font-inter mb-[20px] text-left md:text-right text-sm sm:text-base" style="line-height: 1.65; color: #f1f1f1;" class="sm:mb-[24px]">
                         {{ user.role }}<br>
                         {{ user.tagline }}
                     </p>
-                    <div class="flex justify-end">
+                    <div class="flex justify-start md:justify-end">
                         <button class="font-inter uppercase cursor-pointer transition" style="padding: 13px 32px; font-size: 11px; letter-spacing: 1.2px; background: white; border: none; color: #0A111F; border-radius: 25px; font-weight: 600;" onmouseover="this.style.background='#f0f0f0';" onmouseout="this.style.background='white';">
                             DOWNLOAD CV
                         </button>
@@ -59,7 +59,7 @@
             </div>
 
             <!-- Image -->
-            <div class="absolute z-[1] right-8 md:right-12 lg:right-16 bottom-0 w-64 sm:w-72 md:w-80 lg:w-[380px] xl:w-[400px]">
+            <div class="absolute z-[1] right-2 sm:right-4 md:right-8 lg:right-12 xl:right-16 bottom-0 w-48 sm:w-56 md:w-64 lg:w-80 xl:w-[400px]">
                 <img 
                     src="{% static 'images/Me.jpeg' %}" 
                     alt="{{ user.first_name }}" 
@@ -69,11 +69,11 @@
             </div>
 
             <!-- Controls - Outlined Square Buttons -->
-            <div class="absolute flex gap-[10px] z-[5] right-8 bottom-12">
-                <button class="border-2 border-white cursor-pointer font-inter transition" style="width: 40px; height: 40px; background: transparent; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px;" onmouseover="this.style.background='white'; this.style.color='#0A111F';" onmouseout="this.style.background='transparent'; this.style.color='white';">
+            <div class="absolute flex gap-[8px] sm:gap-[10px] z-[5] right-4 sm:right-6 md:right-8 bottom-8 sm:bottom-10 md:bottom-12">
+                <button class="border-2 border-white cursor-pointer font-inter transition" style="width: 36px; height: 36px; background: transparent; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px;" class="sm:w-[40px] sm:h-[40px]" onmouseover="this.style.background='white'; this.style.color='#0A111F';" onmouseout="this.style.background='transparent'; this.style.color='white';">
                     ←
                 </button>
-                <button class="border-2 border-white cursor-pointer font-inter transition" style="width: 40px; height: 40px; background: transparent; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px;" onmouseover="this.style.background='white'; this.style.color='#0A111F';" onmouseout="this.style.background='transparent'; this.style.color='white';">
+                <button class="border-2 border-white cursor-pointer font-inter transition" style="width: 36px; height: 36px; background: transparent; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px;" class="sm:w-[40px] sm:h-[40px]" onmouseover="this.style.background='white'; this.style.color='#0A111F';" onmouseout="this.style.background='transparent'; this.style.color='white';">
                     →
                 </button>
             </div>
@@ -445,49 +445,49 @@
 <section id="contactme" class="relative min-h-screen overflow-hidden">
     <!-- Split Background -->
     <div class="absolute inset-0" style="z-index: 0;">
-        <div class="absolute inset-0 bg-primary-dark" style="width: 220px;"></div>
-        <div class="absolute inset-0 bg-primary-light" style="margin: 0 0 0 220px;"></div>
+        <div class="hidden lg:block absolute inset-0 bg-primary-dark" style="width: 220px;"></div>
+        <div class="absolute inset-0 bg-primary-light" style="margin: 0 0 0 0; padding-left: 0;" class="lg:ml-[220px]"></div>
     </div>
     
-    <div class="relative py-20 lg:py-32 px-8 lg:px-20" style="z-index: 10;">
-        <div class="max-w-6xl mx-auto" style="margin-left: 240px;">
+    <div class="relative py-20 lg:py-32 px-4 sm:px-8 lg:px-20" style="z-index: 10;">
+        <div class="max-w-6xl mx-auto lg:ml-[240px]">
             <!-- Editorial Number -->
-            <span class="text-primary-dark/20 font-montserrat font-bold text-[120px] lg:text-[200px] leading-none absolute top-0 left-0 lg:left-10">05</span>
+            <span class="text-primary-dark/20 font-montserrat font-bold text-[80px] sm:text-[120px] lg:text-[200px] leading-none absolute top-0 left-0 lg:left-10">05</span>
             
-            <div class="relative grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div class="relative grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
                 <!-- Left Content -->
                 <div class="text-center lg:text-left">
-                    <h2 class="relative text-5xl lg:text-7xl font-montserrat font-bold text-primary-dark mb-6 pt-16 lg:pt-20">
+                    <h2 class="relative text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-montserrat font-bold text-primary-dark mb-6 pt-16 lg:pt-20">
                         Let's Build<br/>Together
                     </h2>
                     <div class="w-24 h-1 bg-primary-dark mx-auto lg:mx-0 mb-8"></div>
-                    <p class="text-xl lg:text-2xl text-gray-700 leading-relaxed font-inter mb-12">
+                    <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed font-inter mb-8 sm:mb-12">
                         Open to backend development opportunities and collaborations. Let's create something exceptional.
                     </p>
                     
                     <!-- Quick Stats -->
-                    <div class="grid grid-cols-3 gap-4 mb-12">
+                    <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-8 sm:mb-12">
                         <div class="text-center">
-                            <div class="text-4xl font-montserrat font-bold text-primary-dark mb-1">24/7</div>
-                            <div class="text-sm text-gray-600 font-inter">Available</div>
+                            <div class="text-2xl sm:text-3xl md:text-4xl font-montserrat font-bold text-primary-dark mb-1">24/7</div>
+                            <div class="text-xs sm:text-sm text-gray-600 font-inter">Available</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-4xl font-montserrat font-bold text-primary-dark mb-1">&lt;24h</div>
-                            <div class="text-sm text-gray-600 font-inter">Response</div>
+                            <div class="text-2xl sm:text-3xl md:text-4xl font-montserrat font-bold text-primary-dark mb-1">&lt;24h</div>
+                            <div class="text-xs sm:text-sm text-gray-600 font-inter">Response</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-4xl font-montserrat font-bold text-primary-dark mb-1">100%</div>
-                            <div class="text-sm text-gray-600 font-inter">Remote</div>
+                            <div class="text-2xl sm:text-3xl md:text-4xl font-montserrat font-bold text-primary-dark mb-1">100%</div>
+                            <div class="text-xs sm:text-sm text-gray-600 font-inter">Remote</div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Right Content - Contact Cards -->
-                <div class="space-y-6">
+                <div class="space-y-4 sm:space-y-6">
                     <!-- Email Card -->
-                    <a href="mailto:kalanzavictor@gmail.com" class="group block bg-primary-dark p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-light">
-                        <div class="flex items-center gap-4 mb-3">
-                            <div class="w-14 h-14 rounded-full bg-primary-light flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <a href="mailto:kalanzavictor@gmail.com" class="group block bg-primary-dark p-6 sm:p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-light">
+                        <div class="flex items-center gap-3 sm:gap-4 mb-3">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary-light flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                 <svg class="w-7 h-7 text-primary-dark" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
@@ -505,9 +505,9 @@
                     </a>
                     
                     <!-- LinkedIn Card -->
-                    <a href="https://www.linkedin.com/in/victor-kalanza-a10a67261" target="_blank" class="group block bg-white p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-dark">
-                        <div class="flex items-center gap-4 mb-3">
-                            <div class="w-14 h-14 rounded-full bg-primary-dark flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <a href="https://www.linkedin.com/in/victor-kalanza-a10a67261" target="_blank" class="group block bg-white p-6 sm:p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-dark">
+                        <div class="flex items-center gap-3 sm:gap-4 mb-3">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary-dark flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                 <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                                 </svg>
@@ -524,9 +524,9 @@
                     </a>
                     
                     <!-- GitHub Card -->
-                    <a href="https://github.com/Kalanza" target="_blank" class="group block bg-white p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-dark">
-                        <div class="flex items-center gap-4 mb-3">
-                            <div class="w-14 h-14 rounded-full bg-primary-dark flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <a href="https://github.com/Kalanza" target="_blank" class="group block bg-white p-6 sm:p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-dark">
+                        <div class="flex items-center gap-3 sm:gap-4 mb-3">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary-dark flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                 <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
                                 </svg>
