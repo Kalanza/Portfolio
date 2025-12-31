@@ -15,15 +15,15 @@
     <!-- Main Content Layer -->
     <div class="relative z-10 flex h-full">
 
-        <!-- Left Sidebar: Logo & Navigation -->
-        <div class="flex relative w-[220px] flex-col justify-between text-white z-20" style="padding: 40px 30px;">
+        <!-- Left Sidebar: Logo & Navigation (responsive) -->
+        <div class="flex relative w-[220px] flex-col justify-between text-white z-20 p-4 md:p-[40px_30px] md:w-[220px] w-[80px]">
             <!-- Logo -->
             <div class="flex items-start">
-                <div class="text-[28px] font-[800]">◻</div>
+                <div class="text-[24px] md:text-[28px] font-[800]">◻</div>
             </div>
             <!-- Navigation at Bottom -->
-            <nav class="mb-16">
-                <ul class="flex flex-col gap-[18px] text-[11px] tracking-[1.8px] uppercase font-inter" style="color: #d7dce1;">
+            <nav class="mb-8 md:mb-16">
+                <ul class="flex flex-col gap-3 md:gap-[18px] text-[10px] md:text-[11px] tracking-[1.2px] md:tracking-[1.8px] uppercase font-inter" style="color: #d7dce1;">
                     {% for item in nav_items %}
                     <li class="hover:text-white cursor-pointer transition-colors duration-300">
                         <a href="#{{ item|lower|cut:' ' }}">{{ item }}</a>
@@ -36,12 +36,12 @@
         <!-- Right Hero Area -->
         <div class="relative flex-1 flex items-center justify-between z-20 p-8 md:p-[60px_80px]">
             
-            <!-- Text Block - Overlapping Both Sections -->
-            <div class="text-white relative md:absolute md:left-[-100px] md:top-1/2 md:transform md:-translate-y-1/2 z-[4] max-w-[700px]">
-                <div class="flex flex-col items-end text-right">
-                    <h1 class="font-montserrat font-[800] mb-4 text-4xl sm:text-5xl md:text-6xl" style="line-height: 1.05; letter-spacing: -1px;">Hi, I’m Victor Kalanza</h1>
-                    <h2 class="text-xl md:text-2xl font-semibold text-brand-tan mb-4">Backend Developer | Python & Django Specialist</h2>
-                    <p class="text-lg md:text-xl text-white/90 font-inter mb-4 max-w-xl">I design and build scalable APIs and backend systems that help businesses grow. Let’s work together to turn your ideas into robust, production-ready solutions.</p>
+            <!-- Text Block - Responsive and Brief -->
+            <div class="text-white relative md:absolute md:left-[-100px] md:top-1/2 md:transform md:-translate-y-1/2 z-[4] max-w-[700px] w-full">
+                <div class="flex flex-col items-end text-right md:items-end md:text-right items-center text-center">
+                    <h1 class="font-montserrat font-[800] mb-2 text-2xl sm:text-3xl md:text-5xl" style="line-height: 1.1; letter-spacing: -1px;">Victor Kalanza</h1>
+                    <h2 class="text-base md:text-xl font-semibold text-brand-tan mb-2">Backend Developer</h2>
+                    <p class="text-sm md:text-lg text-white/90 font-inter mb-2 max-w-xs md:max-w-xl">Building scalable APIs and backend systems with Python & Django.</p>
                 </div>
             </div>
 
@@ -49,7 +49,7 @@
 
             <!-- Hero Photo -->
             <div class="relative z-10 flex items-center justify-center md:justify-end w-full h-full">
-                <img src="{% static 'images/Me.jpeg' %}" alt="Victor Kalanza" class="rounded-full shadow-2xl w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-white" style="background: #fff;" />
+                <img src="{% static 'images/Me.jpeg' %}" alt="Victor Kalanza" class="rounded-full shadow-2xl w-32 h-32 sm:w-40 sm:h-40 md:w-64 md:h-64 object-cover border-4 border-white" style="background: #fff;" />
             </div>
 
             <!-- Controls - Outlined Square Buttons -->
