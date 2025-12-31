@@ -35,24 +35,16 @@
 
         <!-- Right Hero Area -->
         <div class="relative flex-1 flex items-center justify-between z-20 p-8 md:p-[60px_80px]">
-            
-            <!-- Text Block - Responsive and Brief -->
-            <div class="text-white relative md:absolute md:left-[-100px] md:top-1/2 md:transform md:-translate-y-1/2 z-[4] max-w-[700px] w-full">
-                <div class="flex flex-col items-end text-right md:items-end md:text-right items-center text-center">
-                    <h1 class="font-montserrat font-[800] mb-2 text-2xl sm:text-3xl md:text-5xl" style="line-height: 1.1; letter-spacing: -1px;">Victor Kalanza</h1>
-                    <h2 class="text-base md:text-xl font-semibold text-brand-tan mb-2">Backend Developer</h2>
-                    <p class="text-sm md:text-lg text-white/90 font-inter mb-2 max-w-xs md:max-w-xl">Building scalable APIs and backend systems with Python & Django.</p>
-                </div>
+            <!-- Text Block - Shifted Left -->
+            <div class="text-white relative z-[4] max-w-[700px] w-full flex flex-col justify-center items-start text-left">
+                <h1 class="font-montserrat font-[800] mb-2 text-2xl sm:text-3xl md:text-5xl" style="line-height: 1.1; letter-spacing: -1px;">Hi there, I’m Victor Kalanza</h1>
+                <h2 class="text-base md:text-xl font-semibold text-brand-tan mb-2">Junior Backend Developer</h2>
+                <p class="text-sm md:text-lg text-white/90 font-inter mb-4 max-w-xl">I build scalable, resilient API-driven systems using Python, Django, and FastAPI.</p>
             </div>
-
-            <!-- Image -->
-
             <!-- Hero Photo -->
             <div class="relative z-10 flex items-center justify-center md:justify-end w-full h-full">
-                <img src="{% static 'images/Me.jpeg' %}" alt="Victor Kalanza" class="rounded-full shadow-2xl w-32 h-32 sm:w-40 sm:h-40 md:w-64 md:h-64 object-cover border-4 border-white" style="background: #fff;" />
+                <img src="{% static 'images/Me.jpeg' %}" alt="Victor Kalanza" class="shadow-2xl w-32 h-32 sm:w-40 sm:h-40 md:w-64 md:h-64 object-cover" />
             </div>
-
-            <!-- Controls - Outlined Square Buttons -->
         </div>
     </div>
 </section>
@@ -419,21 +411,17 @@
 
 <!-- Contact Section - Redesigned with Split Background -->
 <section id="contactme" class="relative min-h-screen overflow-hidden">
-    <!-- Split Background -->
-    <div class="absolute inset-0 flex" style="z-index: 0;">
-        <div class="bg-primary-dark w-[80px] sm:w-[140px] md:w-[220px] h-full"></div>
-        <div class="bg-primary-light flex-1 h-full"></div>
-    </div>
+    <!-- Gradient Background -->
+    <div class="absolute inset-0 w-full h-full" style="z-index: 0; background: linear-gradient(135deg, #c79a6c 0%, #0e1621 100%);"></div>
 
-    <div class="relative py-12 sm:py-16 md:py-20 lg:py-32 px-2 sm:px-4 md:px-6 lg:px-20" style="z-index: 10;">
-        <div class="max-w-6xl mx-auto md:ml-[160px] lg:ml-[240px]">
+    <div class="relative py-8 sm:py-12 md:py-16 lg:py-24 px-2 sm:px-4 md:px-6 lg:px-20" style="z-index: 10;">
+        <div class="max-w-3xl sm:max-w-4xl md:max-w-5xl lg:max-w-6xl mx-auto md:ml-0 lg:ml-[120px]">
             <!-- Editorial Number -->
-            <span class="text-primary-dark/20 font-montserrat font-bold text-[80px] md:text-[120px] lg:text-[200px] leading-none absolute top-0 left-0 lg:left-10">05</span>
-            
-            <div class="relative grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 lg:gap-20 items-center">
+            <span class="hidden sm:block text-primary-dark/20 font-montserrat font-bold text-[60px] md:text-[100px] lg:text-[180px] leading-none absolute top-0 left-0 lg:left-10">05</span>
+            <div class="relative flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-20 items-center">
                 <!-- Left Content -->
-                <div class="text-center lg:text-left">
-                    <h2 class="relative text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-montserrat font-bold text-primary-dark mb-4 pt-10 sm:pt-16 lg:pt-20">
+                <div class="w-full lg:w-1/2 text-center lg:text-left">
+                    <h2 class="relative text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-montserrat font-bold text-primary-dark mb-4 pt-8 sm:pt-12 lg:pt-20">
                         Let's Build<br/>Together
                     </h2>
                     <div class="w-16 sm:w-24 h-1 bg-primary-dark mx-auto lg:mx-0 mb-6 sm:mb-8"></div>
@@ -441,7 +429,7 @@
                         Open to backend development opportunities and collaborations. Let's create something exceptional.
                     </p>
                     <!-- Quick Stats -->
-                    <div class="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-10 lg:mb-12">
+                    <div class="flex flex-row justify-center lg:justify-start gap-4 mb-8 sm:mb-10 lg:mb-12">
                         <div class="text-center">
                             <div class="text-2xl sm:text-3xl md:text-4xl font-montserrat font-bold text-primary-dark mb-1">24/7</div>
                             <div class="text-xs sm:text-sm text-gray-600 font-inter">Available</div>
@@ -456,61 +444,58 @@
                         </div>
                     </div>
                 </div>
-                
                 <!-- Right Content - Contact Cards -->
-                <div class="space-y-5 md:space-y-6">
+                <div class="w-full lg:w-1/2 flex flex-col gap-4">
                     <!-- Email Card -->
                     <a href="mailto:kalanzavictor@gmail.com" class="group block bg-primary-dark p-4 sm:p-6 md:p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-light">
-                        <div class="flex items-center gap-3 md:gap-4 mb-3">
-                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary-light flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <div class="flex flex-col sm:flex-row items-center gap-3 md:gap-4 mb-3">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary-light flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-2 sm:mb-0">
                                 <svg class="w-7 h-7 text-primary-dark" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                                 </svg>
                             </div>
-                            <div class="flex-1">
+                            <div class="flex-1 text-center sm:text-left">
                                 <div class="text-primary-light text-sm font-inter mb-1">Email Address</div>
-                                <div class="text-white text-lg font-montserrat font-semibold">kalanzavictor@gmail.com</div>
+                                <div class="text-white text-lg font-montserrat font-semibold break-all">kalanzavictor@gmail.com</div>
                             </div>
-                            <svg class="w-6 h-6 text-primary-light group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="hidden sm:block w-6 h-6 text-primary-light group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                             </svg>
                         </div>
                         <p class="text-white/70 text-sm font-inter">Drop me a message about your project</p>
                     </a>
-                    
                     <!-- LinkedIn Card -->
                     <a href="https://www.linkedin.com/in/victor-kalanza-a10a67261" target="_blank" class="group block bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-dark">
-                        <div class="flex items-center gap-3 md:gap-4 mb-3">
-                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary-dark flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <div class="flex flex-col sm:flex-row items-center gap-3 md:gap-4 mb-3">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary-dark flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-2 sm:mb-0">
                                 <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                                 </svg>
                             </div>
-                            <div class="flex-1">
+                            <div class="flex-1 text-center sm:text-left">
                                 <div class="text-gray-600 text-sm font-inter mb-1">Professional Network</div>
                                 <div class="text-primary-dark text-lg font-montserrat font-semibold">LinkedIn Profile</div>
                             </div>
-                            <svg class="w-6 h-6 text-primary-dark group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="hidden sm:block w-6 h-6 text-primary-dark group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                             </svg>
                         </div>
                         <p class="text-gray-600 text-sm font-inter">Let's connect professionally</p>
                     </a>
-                    
                     <!-- GitHub Card -->
                     <a href="https://github.com/Kalanza" target="_blank" class="group block bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-dark">
-                        <div class="flex items-center gap-3 md:gap-4 mb-3">
-                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary-dark flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <div class="flex flex-col sm:flex-row items-center gap-3 md:gap-4 mb-3">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary-dark flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-2 sm:mb-0">
                                 <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
                                 </svg>
                             </div>
-                            <div class="flex-1">
+                            <div class="flex-1 text-center sm:text-left">
                                 <div class="text-gray-600 text-sm font-inter mb-1">Open Source</div>
                                 <div class="text-primary-dark text-lg font-montserrat font-semibold">GitHub Profile</div>
                             </div>
-                            <svg class="w-6 h-6 text-primary-dark group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="hidden sm:block w-6 h-6 text-primary-dark group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                             </svg>
                         </div>
@@ -518,9 +503,8 @@
                     </a>
                 </div>
             </div>
-            
             <!-- Footer -->
-            <div class="mt-20 pt-8 border-t border-primary-dark/20 text-center">
+            <div class="mt-12 pt-8 border-t border-primary-dark/20 text-center">
                 <p class="text-gray-600 text-sm font-inter">
                     © 2025 Victor Mumo Kalanza. Built with Django & Tailwind CSS.
                 </p>
