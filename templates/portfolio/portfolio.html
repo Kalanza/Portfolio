@@ -1,55 +1,104 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
 
 {% block title %}Portfolio - All Projects{% endblock %}
 
 {% block content %}
-<section class="min-h-screen bg-white py-20 px-8 lg:px-20">
-    <div class="max-w-7xl mx-auto">
-        <div class="mb-12">
-            <a href="{% url 'portfolio:home' %}" class="text-primary-dark hover:underline font-semibold mb-4 inline-block">← Back to Home</a>
-            <h1 class="text-5xl lg:text-7xl font-montserrat font-bold text-primary-dark mb-4">All Projects</h1>
-            <p class="text-xl text-gray-600">A comprehensive showcase of backend development work</p>
+<section class="min-h-screen bg-primary-dark py-20 px-6 sm:px-8 lg:px-20">
+    <div class="max-w-7xl mx-auto pt-10">
+        <!-- Breadcrumbs / Header -->
+        <div class="mb-16">
+            <a href="{% url 'portfolio:home' %}" class="inline-flex items-center gap-1.5 text-xs font-bold font-outfit uppercase tracking-widest text-primary-accent hover:text-primary-accent-hover transition-colors mb-6">
+                <span>←</span>
+                <span>Back to Home</span>
+            </a>
+            <h1 class="font-outfit text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4">All Showcase Projects</h1>
+            <div class="w-20 h-1 bg-primary-accent mb-6"></div>
+            <p class="font-inter text-base sm:text-lg text-primary-muted max-w-2xl leading-relaxed">
+                A comprehensive engineering portfolio of systems, robust web APIs, database optimizations, and automation tools built with clean backend code.
+            </p>
         </div>
 
+        <!-- Projects Grid -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for project in projects %}
-            <div class="bg-gray-50 rounded-lg overflow-hidden shadow-lg project-card">
-                {% if project.image %}
-                <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-48 object-cover">
-                {% else %}
-                <div class="w-full h-48 bg-primary-dark flex items-center justify-center">
-                    <span class="text-white text-4xl font-montserrat font-bold">{{ project.title|slice:":1" }}</span>
+            <div class="bg-primary-green border border-white/5 hover:border-primary-accent/40 rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 flex flex-col justify-between group">
+                
+                <!-- Project Visual Preview -->
+                <div>
+                    <div class="relative w-full aspect-[16/10] bg-primary-dark overflow-hidden border-b border-white/5">
+                        {% if project.title == "Regina Yego Girls Center Solar Power Project" %}
+                        <img src="{% static 'images/solar_team.png' %}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        {% elif project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        {% else %}
+                        <img src="{% static 'images/project_placeholder.png' %}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        {% endif %}
+                    </div>
+                    
+                    <div class="p-6">
+                        <!-- Project Category Tag -->
+                        <span class="block font-outfit text-[10px] font-bold text-primary-accent uppercase tracking-wider mb-2">
+                            {% if project.title == "Regina Yego Girls Center Solar Power Project" %}
+                            Humanitarian Eng & Renewable Energy
+                            {% else %}
+                            Backend Implementation
+                            {% endif %}
+                        </span>
+
+                        <!-- Project Title -->
+                        <h3 class="font-outfit text-xl font-bold text-white mb-3 group-hover:text-primary-accent transition-colors">
+                            {{ project.title }}
+                        </h3>
+                        <p class="font-inter text-xs sm:text-sm text-primary-muted leading-relaxed mb-6">
+                            {{ project.description }}
+                        </p>
+                        
+                        <!-- Tech parameters info -->
+                        <div class="mb-4">
+                            <span class="block text-[10px] text-primary-accent/60 font-bold uppercase tracking-wider mb-1.5 font-outfit">Tech Stack</span>
+                            <div class="flex flex-wrap gap-1.5">
+                                {% for tech in project.tech_stack|split:"," %}
+                                <span class="text-[9px] font-mono px-2 py-0.5 bg-primary-dark text-primary-muted border border-white/10 rounded">{{ tech|trim }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        {% if project.database_schema %}
+                        <div class="mb-4 border-t border-white/5 pt-3">
+                            <span class="block text-[10px] text-primary-accent/60 font-bold uppercase tracking-wider mb-1 font-outfit">
+                                {% if project.title == "Regina Yego Girls Center Solar Power Project" %}System Specs{% else %}Database Schema{% endif %}
+                            </span>
+                            <p class="font-mono text-[10px] text-primary-muted {% if project.title == 'Regina Yego Girls Center Solar Power Project' %}whitespace-pre-line leading-relaxed{% else %}truncate{% endif %}">
+                                {{ project.database_schema }}
+                            </p>
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
-                {% endif %}
-                <div class="p-6">
-                    <h3 class="text-2xl font-montserrat font-bold text-primary-dark mb-3">{{ project.title }}</h3>
-                    <p class="text-gray-700 mb-4">{{ project.description }}</p>
-                    
-                    <div class="mb-4">
-                        <h4 class="font-semibold text-primary-dark mb-2 text-sm">TECH STACK</h4>
-                        <p class="text-gray-600 text-sm">{{ project.tech_stack }}</p>
-                    </div>
-                    
-                    {% if project.database_schema %}
-                    <div class="mb-4">
-                        <h4 class="font-semibold text-primary-dark mb-2 text-sm">DATABASE SCHEMA</h4>
-                        <p class="text-gray-600 text-sm">{{ project.database_schema|truncatewords:15 }}</p>
-                    </div>
+                
+                <!-- Project actions -->
+                <div class="p-6 pt-0 mt-auto border-t border-white/5 flex gap-4">
+                    {% if project.api_documentation %}
+                    <a href="{{ project.api_documentation }}" target="_blank" class="font-outfit text-xs font-bold text-primary-accent hover:text-white uppercase tracking-widest flex items-center gap-1 transition-colors">
+                        <span>Live Demo</span>
+                        <span>↗</span>
+                    </a>
                     {% endif %}
-                    
-                    <div class="flex gap-4 mt-4 pt-4 border-t border-gray-200">
-                        {% if project.api_documentation %}
-                        <a href="{{ project.api_documentation }}" target="_blank" class="text-primary-dark hover:underline text-sm font-semibold">Live Demo →</a>
-                        {% endif %}
-                        {% if project.github_link %}
-                        <a href="{{ project.github_link }}" target="_blank" class="text-primary-dark hover:underline text-sm font-semibold">GitHub →</a>
-                        {% endif %}
-                    </div>
+                    {% if project.github_link %}
+                    <a href="{{ project.github_link }}" target="_blank" class="font-outfit text-xs font-bold text-white/60 hover:text-white uppercase tracking-widest transition-colors ml-auto">
+                        <span>GitHub</span>
+                    </a>
+                    {% endif %}
                 </div>
+
             </div>
             {% empty %}
-            <div class="col-span-full text-center py-20">
-                <p class="text-gray-500 text-xl">No projects available yet. Check back soon!</p>
+            <!-- Fallback if database is empty -->
+            <div class="col-span-full text-center py-20 border border-dashed border-white/10 rounded-2xl bg-primary-green/20">
+                <p class="text-primary-muted text-base sm:text-lg mb-4">No projects available yet.</p>
+                <a href="{% url 'portfolio:home' %}" class="inline-block text-xs font-bold font-outfit uppercase tracking-widest text-primary-accent hover:underline">Return to Home</a>
             </div>
             {% endfor %}
         </div>

@@ -13,13 +13,15 @@ def home(request):
             'first_name': 'VICTOR',
             'middle_name': 'MUMO', 
             'last_name': 'KALANZA',
-            'role': 'Junior Backend Developer',
-            'tagline': 'Building efficient, scalable, and resilient API-driven systems.',
-            'bio': """I am a Junior Backend Developer focused on building efficient, scalable, and resilient API-driven systems. My core stack is centered on Python, with hands-on experience using Django and FastAPI to design clean, maintainable backend architectures.
+            'role': 'Electrical Engineering Student | Backend Developer',
+            'tagline': 'I build scalable backend systems at the intersection of Electrical Engineering and Software Development, driven by a mission to solve real-world problems.',
+            'bio': """I build scalable backend systems at the intersection of Electrical Engineering and Software Development, driven by a mission to solve real-world problems through reliable, impact-focused technology.
 
-I enjoy working across the entire backend development lifecycle — from database modeling and API design to testing, containerization, and deployment. I place strong emphasis on writing readable, well-structured code and following best practices that support long-term scalability and reliability.
+As an Electrical & Electronics Engineering student at Moi University, my foundation is rooted in renewable energy and sustainable systems. I’ve applied this engineering mindset to community impact projects, including the deployment of solar power solutions for underserved educational institutions, reinforcing my belief in technology as a force for good. I currently serve as Vice Chairman of the IEEE Computer Society (Moi University Chapter), where I actively promote innovation, collaboration, and ethical tech.
 
-Beyond the technical side, I value collaboration and continuous learning. I actively contribute to open-source projects and believe in using technology as a tool for inclusion, accessibility, and positive impact within the tech ecosystem. I am motivated by environments where ideas are shared openly and systems are built with both users and developers in mind.""",
+On the software side, I’m a Backend Developer specializing in Python, with hands-on experience building robust, high-performance API services using Django and FastAPI. My technical strengths span the full backend lifecycle—database design (PostgreSQL), microservices architecture, containerization with Docker, and building systems that are reliable, maintainable, and scalable.
+
+Beyond engineering and code, I’m passionate about leadership and community building. As the GDG Lead at Moi University, I mentor student developers, organize technical events, and encourage open-source contribution and peer learning.""",
         },
         'nav_items': [
             'ABOUT ME', 'EXPERIENCE', 'SERVICES', 'PROJECTS', 'CONTACT ME'

@@ -3,552 +3,984 @@
 {% load custom_filters %}
 
 {% block content %}
-<!-- Hero Section - L-Shape Background Layout -->
-<section id="home" class="relative overflow-hidden h-screen m-[0_0_5vh_5vh] bg-[#D2A679] shadow-[0_30px_60px_rgba(0,0,0,0.3)]">
-    
-    <!-- Dark Blue Left Sidebar -->
-    <div class="absolute inset-0" style="background: #0A111F; clip-path: polygon(0 0, 30% 0, 30% 100%, 0 100%); z-index: 0;"></div>
-    
-    <!-- Bottom Dark Border -->
-    <div class="absolute bottom-0 left-0 right-0 h-2" style="background: #0A111F; z-index: 5;"></div>
-
-    <!-- Main Content Layer -->
-    <div class="relative z-10 flex h-full">
-
-        <!-- Left Sidebar: Logo & Navigation (responsive) -->
-        <div class="flex relative w-[220px] flex-col justify-between text-white z-20 p-4 md:p-[40px_30px] md:w-[220px] w-[80px]">
-            <!-- Logo -->
-            <div class="flex items-start">
-                <div class="text-[24px] md:text-[28px] font-[800]">◻</div>
+<!-- Header / Navbar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-primary-dark/90 border-b border-primary-green/30 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#home" class="flex items-center gap-2 group">
+            <div class="relative w-10 h-10 flex items-center justify-center">
+                <!-- Double overlapping outline squares (Auron brand style) -->
+                <div class="absolute inset-0 border-2 border-primary-accent rounded-sm group-hover:rotate-12 transition-transform duration-300"></div>
+                <div class="absolute inset-1 border border-white/20 rounded-sm group-hover:-rotate-12 transition-transform duration-300"></div>
+                <span class="font-outfit font-black text-white text-base tracking-tighter relative z-10">VK</span>
             </div>
-            <!-- Navigation at Bottom -->
-            <nav class="mb-8 md:mb-16">
-                <ul class="flex flex-col gap-3 md:gap-[18px] text-[10px] md:text-[11px] tracking-[1.2px] md:tracking-[1.8px] uppercase font-inter" style="color: #d7dce1;">
-                    {% for item in nav_items %}
-                    <li class="hover:text-white cursor-pointer transition-colors duration-300">
-                        <a href="#{{ item|lower|cut:' ' }}">{{ item }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </nav>
+            <span class="font-outfit font-bold text-lg tracking-wider text-white uppercase hidden sm:block">Kalanza</span>
+        </a>
+
+        <!-- Navigation Links -->
+        <nav class="hidden md:flex items-center gap-8">
+            <ul class="flex items-center gap-8 font-inter text-xs tracking-widest text-primary-muted uppercase">
+                <li class="hover:text-white transition-colors"><a href="#home">Home</a></li>
+                <li class="hover:text-white transition-colors"><a href="#pillars">Core Pillars</a></li>
+                <li class="hover:text-white transition-colors"><a href="#aboutme">About Me</a></li>
+                <li class="hover:text-white transition-colors"><a href="#services">Services</a></li>
+                <li class="hover:text-white transition-colors"><a href="#projects">Projects</a></li>
+                <li class="hover:text-white transition-colors"><a href="#experience">Timeline</a></li>
+                <li class="hover:text-white transition-colors"><a href="#faq">FAQ</a></li>
+            </ul>
+        </nav>
+
+        <!-- Get In Touch Button -->
+        <div class="flex items-center gap-4">
+            <a href="#contactme" class="group flex items-center gap-2 bg-transparent border border-primary-green px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-white hover:border-primary-accent transition-all duration-300">
+                <span>Get In Touch</span>
+                <span class="w-6 h-6 rounded-full bg-primary-accent text-primary-dark flex items-center justify-center font-bold text-xs group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300">
+                    ↗
+                </span>
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section id="home" class="relative pt-32 pb-24 md:pt-40 md:pb-36 bg-primary-dark overflow-hidden min-h-screen flex items-center">
+    <!-- Grid Overlay -->
+    <div class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:30px_30px]" style="z-index: 1;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Side: Title & Description -->
+            <div class="lg:col-span-7 flex flex-col items-start text-left">
+                <span class="font-outfit text-xs font-bold text-primary-accent uppercase tracking-[0.3em] mb-4">
+                    Victor - Electrical Engineering Student
+                </span>
+                
+                <h1 class="font-outfit text-4xl sm:text-5xl md:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
+                    Powering a<br>
+                    <span class="text-primary-accent font-extrabold">Sustainable</span><br>
+                    Future.
+                </h1>
+                
+                <p class="font-inter text-base md:text-lg text-primary-muted max-w-xl leading-relaxed mb-8">
+                    {{ user.tagline|default:"I design and build robust, high-performance API-driven systems. Specializing in Python, Django, FastAPI, database optimization, and scalable cloud architectures." }}
+                </p>
+                
+                <!-- Hero Action Buttons -->
+                <div class="flex flex-wrap items-center gap-6 mb-12">
+                    <!-- Explore Work button -->
+                    <a href="#projects" class="group flex items-center gap-3">
+                        <div class="w-14 h-14 rounded-full border border-primary-green flex items-center justify-center group-hover:border-primary-accent transition-all duration-300 bg-primary-green/20">
+                            <svg class="w-5 h-5 text-primary-accent translate-x-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <span class="font-outfit text-xs font-bold tracking-widest text-white uppercase group-hover:text-primary-accent transition-colors">
+                            Explore Work
+                        </span>
+                    </a>
+
+                    <!-- Get Started button -->
+                    <a href="#aboutme" class="group bg-primary-green hover:bg-primary-green/80 border border-white/10 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest text-white flex items-center gap-3 transition-all duration-300">
+                        <span>Get Started</span>
+                        <div class="w-5 h-5 rounded-full bg-primary-accent text-primary-dark flex items-center justify-center font-bold text-[10px] group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300">
+                            ↗
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Side: Hero Visual/Graphic -->
+            <div class="lg:col-span-5 relative">
+                <div class="relative z-10 w-full max-w-[420px] mx-auto">
+                    <!-- Outer container -->
+                    <div class="aspect-square bg-primary-green/45 border border-white/10 rounded-2xl p-6 overflow-hidden relative group">
+                        <!-- Forest green tint background image -->
+                        <img src="{% static 'images/backend_hero_bg.png' %}" alt="Backend Architecture" class="w-full h-full object-cover rounded-xl opacity-90 group-hover:scale-102 transition-transform duration-500">
+                        
+                    </div>
+
+                    <!-- Underlay cards (solid flat design) -->
+                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-primary-green/30 border border-white/5 rounded-xl -z-10 rotate-12"></div>
+                    <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-primary-green/40 border border-white/5 rounded-xl -z-10 -rotate-12"></div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- Right Hero Area -->
-        <div class="relative flex-1 flex items-center justify-between z-20 p-8 md:p-[60px_80px]">
-            <!-- Text Block - Shifted Left -->
-            <div class="text-white relative z-[4] max-w-[700px] w-full flex flex-col justify-center items-start text-left">
-                <h1 class="font-montserrat font-[800] mb-2 text-2xl sm:text-3xl md:text-5xl" style="line-height: 1.1; letter-spacing: -1px;">Hi there, I’m Victor Kalanza</h1>
-                <h2 class="text-base md:text-xl font-semibold text-brand-tan mb-2">Junior Backend Developer</h2>
-                <p class="text-sm md:text-lg text-white/90 font-inter mb-4 max-w-xl">I build scalable, resilient API-driven systems using Python, Django, and FastAPI.</p>
+        <!-- Overlap Card Section -->
+        <div class="mt-16 md:mt-24 relative z-20">
+            <div class="grid md:grid-cols-12 bg-primary-green border border-white/10 rounded-2xl overflow-hidden shadow-xl">
+                <!-- Image overlap column -->
+                <div class="md:col-span-4 h-48 md:h-auto min-h-[160px] relative overflow-hidden">
+                    <img src="{% static 'images/project_placeholder.png' %}" alt="System Architecture Mockup" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-primary-dark/30 mix-blend-multiply"></div>
+                </div>
+                <!-- Content text column -->
+                <div class="md:col-span-8 p-8 md:p-10 flex flex-col justify-center items-start">
+                    <span class="px-3 py-1 bg-primary-accent/10 border border-primary-accent/30 text-primary-accent text-[10px] font-bold tracking-widest uppercase rounded-full mb-3">
+                        Clean & Efficient Systems
+                    </span>
+                    <h3 class="font-outfit text-xl sm:text-2xl font-bold text-white mb-2 leading-snug">
+                        Your trusted partner in building high-performance backend architectures.
+                    </h3>
+                    <p class="font-inter text-sm text-primary-muted">
+                        I focus on database performance, scalable API structures, and optimized server execution. I make sure that data flows smoothly, security is tight, and load times are close to zero.
+                    </p>
+                </div>
             </div>
-            <!-- Hero Photo -->
-            <div class="relative z-10 flex items-center justify-center md:justify-end w-full h-full">
-                <img src="{% static 'images/Me.jpeg' %}" alt="Victor Kalanza" class="shadow-2xl w-32 h-32 sm:w-40 sm:h-40 md:w-64 md:h-64 object-cover" />
+        </div>
+
+    </div>
+</section>
+
+<!-- Core Pillars Section -->
+<section id="pillars" class="py-20 lg:py-32 bg-primary-dark relative overflow-hidden border-t border-primary-green/30">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <!-- Section Header -->
+        <div class="grid lg:grid-cols-12 gap-8 mb-16 lg:mb-20 items-end">
+            <div class="lg:col-span-4 flex flex-col items-start">
+                <span class="font-outfit text-xs font-bold text-primary-accent uppercase tracking-[0.3em] mb-3">Why Choose Victor</span>
+                <div class="w-16 h-[2px] bg-primary-accent"></div>
             </div>
+            <div class="lg:col-span-8">
+                <h2 class="font-outfit text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
+                    Empowering a Digital Future with <span class="text-primary-accent">Cutting-Edge</span> Backend Solutions
+                </h2>
+            </div>
+        </div>
+
+        <!-- Pillars Grid (3 cards matching Auron layout) -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Pillar Card 1: Solar PV -->
+            <div class="group bg-primary-green border border-white/5 hover:border-primary-accent/40 rounded-2xl p-8 transition-all duration-300 flex flex-col justify-between h-[360px]">
+                <div>
+                    <!-- Icon in circle -->
+                    <div class="w-14 h-14 rounded-full bg-primary-dark flex items-center justify-center mb-8 border border-white/10 group-hover:border-primary-accent/40 transition-colors">
+                        <svg class="w-7 h-7 text-primary-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-outfit text-xl font-bold text-white mb-4">Solar Energy & PV Design</h3>
+                    <p class="font-inter text-sm text-primary-muted leading-relaxed">
+                        Design and load sizing of off-grid solar energy systems. Calculations for solar array outputs, battery capacity (Lithium/Lead-Acid), inverter specs, and balance-of-system combinatorial infrastructure.
+                    </p>
+                </div>
+                <a href="#services" class="font-outfit text-xs font-bold tracking-widest text-primary-accent uppercase flex items-center gap-1.5 mt-6 group-hover:translate-x-1.5 transition-transform duration-300">
+                    <span>Read More</span>
+                    <span>→</span>
+                </a>
+            </div>
+
+            <!-- Pillar Card 2: Electrical Engineering -->
+            <div class="group bg-primary-green border border-white/5 hover:border-primary-accent/40 rounded-2xl p-8 transition-all duration-300 flex flex-col justify-between h-[360px]">
+                <div>
+                    <!-- Icon in circle -->
+                    <div class="w-14 h-14 rounded-full bg-primary-dark flex items-center justify-center mb-8 border border-white/10 group-hover:border-primary-accent/40 transition-colors">
+                        <svg class="w-7 h-7 text-primary-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-outfit text-xl font-bold text-white mb-4">Electrical Engineering</h3>
+                    <p class="font-inter text-sm text-primary-muted leading-relaxed">
+                        Core concepts in power electronics, electrical grids, embedded system circuits prototyping, microcontroller firmware integration (Arduino/ESP32), and hardware troubleshooting.
+                    </p>
+                </div>
+                <a href="#services" class="font-outfit text-xs font-bold tracking-widest text-primary-accent uppercase flex items-center gap-1.5 mt-6 group-hover:translate-x-1.5 transition-transform duration-300">
+                    <span>Read More</span>
+                    <span>→</span>
+                </a>
+            </div>
+
+            <!-- Pillar Card 3: Backend Developer (Accent Card) -->
+            <div class="group bg-primary-accent rounded-2xl p-8 transition-all duration-300 flex flex-col justify-between h-[360px] shadow-md">
+                <div>
+                    <!-- Icon in dark circle -->
+                    <div class="w-14 h-14 rounded-full bg-primary-dark flex items-center justify-center mb-8 border border-white/5">
+                        <svg class="w-7 h-7 text-primary-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-outfit text-xl font-bold text-primary-dark mb-4">Backend Development</h3>
+                    <p class="font-inter text-sm text-primary-dark/80 leading-relaxed font-semibold">
+                        Side skill in Python web systems, designing API structures with Django and FastAPI, optimizing PostgreSQL database querying, and microservice containerization using Docker.
+                    </p>
+                </div>
+                <a href="#services" class="font-outfit text-xs font-bold tracking-widest text-primary-dark uppercase flex items-center gap-1.5 mt-6 group-hover:translate-x-1.5 transition-transform duration-300 font-semibold">
+                    <span>Read More</span>
+                    <span>→</span>
+                </a>
+            </div>
+
         </div>
     </div>
 </section>
 
-<!-- About Section -->
-<!-- About Me Section - Redesigned -->
-<section id="aboutme" class="relative min-h-screen bg-white py-20 lg:py-32 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-8 lg:px-20">
-        <!-- Section Header with Editorial Number -->
-        <div class="mb-16">
-            <span class="text-primary-light/30 font-montserrat font-bold text-[120px] lg:text-[180px] leading-none absolute top-0 left-0 lg:left-10" style="z-index: 0;">01</span>
-            <h2 class="relative text-5xl lg:text-7xl font-montserrat font-bold text-primary-dark mb-4 pt-20" style="z-index: 1;">Who I Am</h2>
-            <div class="w-24 h-1 bg-primary-light"></div>
+<!-- About Me Section -->
+<section id="aboutme" class="py-20 lg:py-32 bg-light-gray text-text-dark relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        
+        <!-- Main Layout Grid -->
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            <!-- Left Side: Editorial Bio -->
+            <div class="lg:col-span-7 flex flex-col items-start text-left">
+                <span class="font-outfit text-xs font-bold text-primary-green uppercase tracking-[0.3em] mb-3">Who I Am</span>
+                <h2 class="font-outfit text-3xl sm:text-4xl lg:text-5xl font-black text-primary-dark leading-tight mb-6">
+                    Leading the Clean Backend Code Revolution
+                </h2>
+                <div class="w-16 h-1 bg-primary-green mb-8"></div>
+                
+                <p class="font-inter text-base sm:text-lg text-gray-700 leading-relaxed mb-8 max-w-2xl">
+                    {{ user.bio|linebreaksbr }}
+                </p>
+
+                <!-- Stats Rows -->
+                <div class="grid grid-cols-3 gap-6 sm:gap-8 w-full border-t border-gray-300/80 pt-8 mb-8">
+                    <div>
+                        <div class="font-outfit text-3xl sm:text-4xl font-extrabold text-primary-dark mb-1">5+</div>
+                        <div class="font-inter text-xs text-gray-500 uppercase tracking-wider">Projects Completed</div>
+                    </div>
+                    <div>
+                        <div class="font-outfit text-3xl sm:text-4xl font-extrabold text-primary-dark mb-1">2+</div>
+                        <div class="font-inter text-xs text-gray-500 uppercase tracking-wider">Years Coding</div>
+                    </div>
+                    <div>
+                        <div class="font-outfit text-3xl sm:text-4xl font-extrabold text-primary-dark mb-1">100%</div>
+                        <div class="font-inter text-xs text-gray-500 uppercase tracking-wider">Committed</div>
+                    </div>
+                </div>
+
+                <!-- Call to action arrow pill -->
+                <a href="#contactme" class="group flex items-center gap-2 bg-primary-dark hover:bg-primary-green text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300">
+                    <span>Contact Me</span>
+                    <span class="w-5 h-5 rounded-full bg-primary-accent text-primary-dark flex items-center justify-center font-bold text-[10px] group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300">
+                        ↗
+                    </span>
+                </a>
+            </div>
+
+            <!-- Right Side: Profile Photo & Mission Cards -->
+            <div class="lg:col-span-5 flex flex-col gap-8">
+                <!-- Image Layout -->
+                <div class="relative w-full max-w-[360px] mx-auto lg:mr-0 aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border border-gray-300/40 bg-white">
+                    {% if user.image %}
+                    <img src="{{ user.image.url }}" alt="Victor Kalanza" class="w-full h-full object-cover">
+                    {% else %}
+                    <img src="{% static 'images/Me.jpeg' %}" alt="Victor Kalanza" class="w-full h-full object-cover">
+                    {% endif %}
+                    
+                    <!-- Tech stack overlay -->
+                    <div class="absolute bottom-6 left-6 right-6 bg-primary-dark/95 border border-white/10 rounded-xl p-4 text-white">
+                        <div class="text-xs text-primary-accent font-semibold tracking-wider uppercase mb-1">Core Tech Stack</div>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[10px] font-mono px-2 py-0.5 bg-white/10 rounded">Python</span>
+                            <span class="text-[10px] font-mono px-2 py-0.5 bg-white/10 rounded">Django</span>
+                            <span class="text-[10px] font-mono px-2 py-0.5 bg-white/10 rounded">FastAPI</span>
+                            <span class="text-[10px] font-mono px-2 py-0.5 bg-white/10 rounded">PostgreSQL</span>
+                            <span class="text-[10px] font-mono px-2 py-0.5 bg-white/10 rounded">Docker</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Two overlapping Mission & Vision Cards below -->
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <!-- Mission card -->
+                    <div class="bg-primary-green border border-white/5 rounded-xl p-6 text-white shadow-md">
+                        <span class="font-outfit text-xs font-bold text-primary-accent uppercase tracking-widest block mb-2">01</span>
+                        <h4 class="font-outfit font-bold text-base mb-2">Our Mission</h4>
+                        <p class="font-inter text-xs text-primary-muted leading-relaxed">
+                            To design secure, fast, and clean API backends that bridge user interfaces with high-performance storage solutions.
+                        </p>
+                    </div>
+
+                    <!-- Vision card -->
+                    <div class="bg-primary-accent rounded-xl p-6 text-primary-dark shadow-md">
+                        <span class="font-outfit text-xs font-bold text-primary-dark/60 uppercase tracking-widest block mb-2">02</span>
+                        <h4 class="font-outfit font-bold text-base mb-2">Our Vision</h4>
+                        <p class="font-inter text-xs text-primary-dark/80 leading-relaxed font-semibold">
+                            To build robust software infrastructures that make backend processing reliable, efficient, and simple.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Tech Partner Strip Section -->
+<section class="py-12 bg-primary-green border-y border-white/5 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-wrap items-center justify-around gap-8 opacity-60">
+            <span class="font-outfit font-black text-xl tracking-tighter text-white uppercase">Moi University</span>
+            <span class="font-outfit font-black text-xl tracking-tighter text-white uppercase">IEEE Student Branch</span>
+            <span class="font-outfit font-black text-xl tracking-tighter text-white uppercase">IEEE Computer Society</span>
+            <span class="font-outfit font-black text-xl tracking-tighter text-white uppercase">GDG Moi</span>
+            <span class="font-outfit font-black text-xl tracking-tighter text-white uppercase">Python</span>
+            <span class="font-outfit font-black text-xl tracking-tighter text-white uppercase">Django</span>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="py-20 lg:py-32 bg-primary-dark text-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        
+        <!-- Section Header -->
+        <div class="grid lg:grid-cols-12 gap-6 mb-16 lg:mb-20 items-end">
+            <div class="lg:col-span-5 flex flex-col items-start">
+                <span class="font-outfit text-xs font-bold text-primary-accent uppercase tracking-[0.3em] mb-3">Our Services</span>
+                <h2 class="font-outfit text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
+                    Powering the Future with Engineering Solutions
+                </h2>
+            </div>
+            <div class="lg:col-span-7">
+                <p class="font-inter text-base text-primary-muted max-w-xl leading-relaxed">
+                    I translate complex physical electrical designs and software engineering requirements into solar calculations, hardware prototypes, and scalable API systems.
+                </p>
+            </div>
         </div>
 
-        <!-- Content Grid -->
-        <div class="grid lg:grid-cols-12 gap-12 lg:gap-16">
-            <!-- Bio Column -->
-            <div class="lg:col-span-7">
-                <div class="space-y-6">
-                    <p class="text-gray-700 text-lg lg:text-xl leading-relaxed font-inter">
-                        {{ user.bio|linebreaksbr }}
+        <!-- Services Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for service in services %}
+            <div class="group bg-primary-green border border-white/5 rounded-2xl overflow-hidden relative min-h-[380px] flex flex-col justify-between p-8 hover:border-primary-accent/40 transition-all duration-300">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary-dark/95 via-primary-green/90 to-transparent -z-10"></div>
+                <div class="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle,rgba(255,255,255,0.15)_1px,transparent_1px)] bg-[size:16px_16px] -z-20"></div>
+
+                <!-- Number tag -->
+                <div class="flex items-center justify-between">
+                    <span class="font-outfit text-sm font-bold text-primary-accent/60 tracking-widest">{{ forloop.counter|stringformat:"02d" }}</span>
+                </div>
+
+                <!-- Content -->
+                <div class="mt-12">
+                    <h3 class="font-outfit text-2xl font-bold text-white mb-4 group-hover:text-primary-accent transition-colors">
+                        {{ service.title }}
+                    </h3>
+                    <p class="font-inter text-sm text-primary-muted leading-relaxed mb-6">
+                        {{ service.description }}
                     </p>
                 </div>
 
-                <!-- Stats Row -->
-                <div class="grid grid-cols-3 gap-6 mt-12 pt-12 border-t border-gray-200">
-                    <div>
-                        <div class="text-4xl font-montserrat font-bold text-primary-dark mb-2">5+</div>
-                        <div class="text-sm text-gray-600 uppercase tracking-wider">Projects</div>
-                    </div>
-                    <div>
-                        <div class="text-4xl font-montserrat font-bold text-primary-dark mb-2">2+</div>
-                        <div class="text-sm text-gray-600 uppercase tracking-wider">Years Coding</div>
-                    </div>
-                    <div>
-                        <div class="text-4xl font-montserrat font-bold text-primary-dark mb-2">100%</div>
-                        <div class="text-sm text-gray-600 uppercase tracking-wider">Committed</div>
-                    </div>
+                <!-- Action / Bottom bar -->
+                <div class="flex items-center justify-between pt-6 border-t border-white/5 mt-auto">
+                    <span class="font-outfit text-[11px] font-bold tracking-widest text-white/50 uppercase group-hover:text-white transition-colors">Service Detail</span>
+                    <span class="w-8 h-8 rounded-full bg-primary-green border border-white/10 group-hover:bg-primary-accent group-hover:text-primary-dark flex items-center justify-center text-xs text-primary-accent font-bold transition-all duration-300">
+                        ↗
+                    </span>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Default service cards if database is empty -->
+            <div class="group bg-primary-green border border-white/5 rounded-2xl overflow-hidden relative min-h-[380px] flex flex-col justify-between p-8 hover:border-primary-accent/40 transition-all duration-300">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary-dark/95 via-primary-green/90 to-transparent -z-10"></div>
+                <span class="font-outfit text-sm font-bold text-primary-accent/60 tracking-widest">01</span>
+                <div class="mt-12">
+                    <h3 class="font-outfit text-2xl font-bold text-white mb-4 group-hover:text-primary-accent transition-colors">API Development</h3>
+                    <p class="font-inter text-sm text-primary-muted leading-relaxed">Design and build scalable, secure RESTful and GraphQL API structures using Django REST Framework and FastAPI.</p>
+                </div>
+                <div class="flex items-center justify-between pt-6 border-t border-white/5 mt-auto">
+                    <span class="font-outfit text-[11px] font-bold tracking-widest text-white/50 uppercase group-hover:text-white transition-colors">Service Detail</span>
+                    <span class="w-8 h-8 rounded-full bg-primary-green border border-white/10 group-hover:bg-primary-accent group-hover:text-primary-dark flex items-center justify-center text-xs text-primary-accent font-bold transition-all duration-300">↗</span>
                 </div>
             </div>
 
-            <!-- Tech Stack Column -->
-            <div class="lg:col-span-5">
-                <div class="sticky top-24">
-                    <div class="bg-primary-dark p-8 lg:p-10 rounded-lg shadow-2xl">
-                        <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-white mb-8">Core Technologies</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="group">
-                                <div class="flex items-center justify-between mb-3">
-                                    <h4 class="font-semibold text-primary-light text-sm uppercase tracking-wider">Languages & Frameworks</h4>
-                                </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">Python</span>
-                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">Django</span>
-                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">FastAPI</span>
-                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">DRF</span>
-                                </div>
-                            </div>
-
-                            <div class="group">
-                                <div class="flex items-center justify-between mb-3">
-                                    <h4 class="font-semibold text-primary-light text-sm uppercase tracking-wider">Databases</h4>
-                                </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">PostgreSQL</span>
-                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">Redis</span>
-                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">MongoDB</span>
-                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">MySQL</span>
-                                </div>
-                            </div>
-
-                            <div class="group">
-                                <div class="flex items-center justify-between mb-3">
-                                    <h4 class="font-semibold text-primary-light text-sm uppercase tracking-wider">DevOps & Cloud</h4>
-                                </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">Docker</span>
-                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">Kubernetes</span>
-                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">AWS</span>
-                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">GCP</span>
-                                    <span class="px-3 py-1.5 bg-white/10 text-white text-sm rounded border border-white/20 hover:bg-white/20 transition-colors">CI/CD</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="group bg-primary-green border border-white/5 rounded-2xl overflow-hidden relative min-h-[380px] flex flex-col justify-between p-8 hover:border-primary-accent/40 transition-all duration-300">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary-dark/95 via-primary-green/90 to-transparent -z-10"></div>
+                <span class="font-outfit text-sm font-bold text-primary-accent/60 tracking-widest">02</span>
+                <div class="mt-12">
+                    <h3 class="font-outfit text-2xl font-bold text-white mb-4 group-hover:text-primary-accent transition-colors">Database Schema Optimization</h3>
+                    <p class="font-inter text-sm text-primary-muted leading-relaxed">Design database schemas and optimize PostgreSQL queries for response time, indexing, and scalable architecture.</p>
+                </div>
+                <div class="flex items-center justify-between pt-6 border-t border-white/5 mt-auto">
+                    <span class="font-outfit text-[11px] font-bold tracking-widest text-white/50 uppercase group-hover:text-white transition-colors">Service Detail</span>
+                    <span class="w-8 h-8 rounded-full bg-primary-green border border-white/10 group-hover:bg-primary-accent group-hover:text-primary-dark flex items-center justify-center text-xs text-primary-accent font-bold transition-all duration-300">↗</span>
                 </div>
             </div>
+
+            <div class="group bg-primary-green border border-white/5 rounded-2xl overflow-hidden relative min-h-[380px] flex flex-col justify-between p-8 hover:border-primary-accent/40 transition-all duration-300">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary-dark/95 via-primary-green/90 to-transparent -z-10"></div>
+                <span class="font-outfit text-sm font-bold text-primary-accent/60 tracking-widest">03</span>
+                <div class="mt-12">
+                    <h3 class="font-outfit text-2xl font-bold text-white mb-4 group-hover:text-primary-accent transition-colors">Cloud & DevOps Setup</h3>
+                    <p class="font-inter text-sm text-primary-muted leading-relaxed">Containerize apps with Docker, implement CI/CD test automation, and configure deployments on AWS/GCP environments.</p>
+                </div>
+                <div class="flex items-center justify-between pt-6 border-t border-white/5 mt-auto">
+                    <span class="font-outfit text-[11px] font-bold tracking-widest text-white/50 uppercase group-hover:text-white transition-colors">Service Detail</span>
+                    <span class="w-8 h-8 rounded-full bg-primary-green border border-white/10 group-hover:bg-primary-accent group-hover:text-primary-dark flex items-center justify-center text-xs text-primary-accent font-bold transition-all duration-300">↗</span>
+                </div>
+            </div>
+            {% endfor %}
         </div>
+
     </div>
 </section>
 
-<!-- Experience Section - Redesigned with Timeline -->
-<section id="experience" class="relative min-h-screen bg-primary-dark py-20 lg:py-32 overflow-hidden">
-    <div class="max-w-6xl mx-auto px-8 lg:px-20">
+<!-- Featured Projects Section -->
+<section id="projects" class="py-20 lg:py-32 bg-light-gray text-text-dark relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        
         <!-- Section Header -->
-        <div class="mb-16">
-            <span class="text-white/5 font-montserrat font-bold text-[120px] lg:text-[180px] leading-none absolute top-0 right-0 lg:right-10" style="z-index: 0;">02</span>
-            <h2 class="relative text-5xl lg:text-7xl font-montserrat font-bold text-white mb-4 pt-20" style="z-index: 1;">Experience</h2>
-            <div class="w-24 h-1 bg-primary-light"></div>
+        <div class="grid lg:grid-cols-12 gap-6 mb-16 lg:mb-20 items-end">
+            <div class="lg:col-span-6 flex flex-col items-start">
+                <span class="font-outfit text-xs font-bold text-primary-green uppercase tracking-[0.3em] mb-3">Portfolio Showcases</span>
+                <h2 class="font-outfit text-3xl sm:text-4xl lg:text-5xl font-black text-primary-dark leading-tight">
+                    Transforming Businesses with Scalable Backend Systems
+                </h2>
+            </div>
+            <div class="lg:col-span-6">
+                <p class="font-inter text-base text-gray-600 max-w-xl leading-relaxed">
+                    Explore a subset of my featured backend systems and database engineering projects. Each demonstrates performance, security, and developer efficiency.
+                </p>
+            </div>
         </div>
 
-        <!-- Timeline -->
-        <div class="relative">
-            <!-- Vertical Line -->
-            <div class="hidden lg:block absolute left-8 top-0 bottom-0 w-0.5 bg-white/20"></div>
-
-            <div class="space-y-12 lg:space-y-16">
-                {% for exp in experiences %}
-                <div class="relative group">
-                    <!-- Timeline Dot -->
-                    <div class="hidden lg:flex absolute left-8 -translate-x-1/2 w-4 h-4 rounded-full bg-primary-light border-4 border-primary-dark group-hover:scale-150 transition-transform duration-300">
-                        {% if exp.current %}
-                        <span class="absolute inset-0 rounded-full bg-primary-light animate-ping opacity-75"></span>
-                        {% endif %}
+        <!-- Projects List (Asymmetrical layout matching reference design) -->
+        <div class="space-y-24">
+            {% for project in projects %}
+            <div class="space-y-12">
+                <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    
+                    <!-- Project Screenshot (Alternating order) -->
+                    <div class="lg:col-span-6 {% if forloop.counter|divisibleby:2 %}lg:order-last{% endif %}">
+                        <div class="relative w-full aspect-[16/10] bg-primary-dark rounded-2xl overflow-hidden shadow-md border border-gray-300/40 group">
+                            <!-- Custom styled preview image -->
+                            {% if project.title == "Regina Yego Girls Center Solar Power Project" %}
+                            <img src="{% static 'images/solar_team.png' %}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500">
+                            {% elif project.image %}
+                            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500">
+                            {% else %}
+                            <img src="{% static 'images/project_placeholder.png' %}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500">
+                            {% endif %}
+                            
+                            <!-- Overlay Dark Mask -->
+                            <div class="absolute inset-0 bg-primary-dark/20 mix-blend-multiply"></div>
+                            
+                            <!-- Large Circular Number Badge -->
+                            <div class="absolute top-6 left-6 w-14 h-14 rounded-full bg-primary-dark border-2 border-primary-accent flex items-center justify-center text-white font-outfit font-black text-base shadow-md">
+                                {{ forloop.counter|stringformat:"02d" }}
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Content Card -->
-                    <div class="lg:ml-20 bg-white/5 p-8 lg:p-10 rounded-lg border border-white/10 hover:border-primary-light/50 hover:bg-white/10 transition-all duration-300 hover:translate-x-2">
-                        <!-- Header -->
-                        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-6">
-                            <div class="flex-1">
-                                <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-white mb-2 group-hover:text-primary-light transition-colors">
-                                    {{ exp.position }}
-                                </h3>
-                                <h4 class="text-lg lg:text-xl text-primary-light font-inter">{{ exp.company }}</h4>
+                    <!-- Project Content Details -->
+                    <div class="lg:col-span-6 flex flex-col items-start text-left">
+                        {% if project.title == "Regina Yego Girls Center Solar Power Project" %}
+                        <span class="font-outfit text-xs font-bold text-primary-green uppercase tracking-[0.2em] mb-2">Humanitarian Engineering & Renewable Energy</span>
+                        {% else %}
+                        <span class="font-outfit text-xs font-bold text-primary-green uppercase tracking-[0.2em] mb-2">Backend Implementation</span>
+                        {% endif %}
+                        <h3 class="font-outfit text-2xl sm:text-3xl font-black text-primary-dark leading-tight mb-4 group-hover:text-primary-green transition-colors">
+                            {{ project.title }}
+                        </h3>
+                        <p class="font-inter text-sm sm:text-base text-gray-700 leading-relaxed mb-6">
+                            {{ project.description }}
+                        </p>
+
+                        <!-- Stats / Tech parameters layout from reference design -->
+                        <div class="grid grid-cols-2 gap-4 w-full border-t border-gray-300/50 pt-4 mb-6">
+                            <div>
+                                <span class="block text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1.5 font-outfit">Tech Stack</span>
+                                <div class="flex flex-wrap gap-1.5">
+                                    {% for tech in project.tech_stack|split:"," %}
+                                    <span class="text-[10px] font-semibold px-2 py-0.5 bg-gray-200 text-gray-700 rounded">{{ tech|trim }}</span>
+                                    {% endfor %}
+                                </div>
                             </div>
-                            
-                            <div class="flex items-center gap-2">
-                                <span class="px-4 py-2 bg-primary-light/20 text-primary-light text-sm font-semibold rounded-full border border-primary-light/30">
-                                    {{ exp.start_date|date:"M Y" }} - {% if exp.current %}<span class="text-white">Present</span>{% else %}{{ exp.end_date|date:"M Y" }}{% endif %}
+                            <div>
+                                <span class="block text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1 font-outfit">Architecture / Specs</span>
+                                <span class="text-xs text-primary-dark font-medium font-mono block whitespace-pre-line leading-relaxed">
+                                    {{ project.database_schema|default:"Relational SQL Database" }}
                                 </span>
-                                {% if exp.current %}
-                                <span class="px-3 py-1 bg-green-500/20 text-green-400 text-xs font-semibold rounded-full border border-green-500/30 flex items-center gap-1">
-                                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                                    Active
-                                </span>
-                                {% endif %}
                             </div>
                         </div>
 
-                        <!-- Description -->
-                        <p class="text-gray-300 text-base lg:text-lg leading-relaxed mb-6 font-inter">
-                            {{ exp.description }}
-                        </p>
+                        <!-- Project Actions -->
+                        <div class="flex flex-wrap items-center gap-4">
+                            {% if project.api_documentation %}
+                            <a href="{{ project.api_documentation }}" target="_blank" class="group flex items-center gap-2 bg-primary-dark hover:bg-primary-green text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300">
+                                <span>Live Demo</span>
+                                <span class="w-4.5 h-4.5 rounded-full bg-primary-accent text-primary-dark flex items-center justify-center font-bold text-[9px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
+                            </a>
+                            {% endif %}
+                            
+                            {% if project.github_link %}
+                            <a href="{{ project.github_link }}" target="_blank" class="group flex items-center gap-2 bg-transparent border-2 border-primary-dark hover:bg-primary-dark hover:text-white px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-primary-dark transition-all duration-300">
+                                <span>GitHub Repo</span>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
 
-                        <!-- Tech Stack -->
+                </div>
+
+                {% if project.title == "Regina Yego Girls Center Solar Power Project" %}
+                <!-- Case Study Gallery -->
+                <div class="mt-8 border-t border-gray-300/40 pt-10">
+                    <h4 class="font-outfit text-sm font-bold text-primary-dark uppercase tracking-wider mb-6">Fieldwork & System Installation Gallery</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                        <!-- Photo 1: Assembly -->
+                        <div class="bg-[#f6faf8] rounded-xl overflow-hidden border border-gray-300/30 shadow-sm flex flex-col group hover:shadow-md transition-all duration-300">
+                            <div class="relative w-full aspect-[4/3] overflow-hidden bg-primary-dark">
+                                <img src="{% static 'images/solar_assembly.png' %}" alt="Solar Structure Assembly" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500">
+                            </div>
+                            <div class="p-4 flex-grow">
+                                <h5 class="font-outfit text-xs font-bold text-primary-dark uppercase tracking-wider mb-1.5">Fieldwork: Structure Assembly</h5>
+                                <p class="font-inter text-xs text-gray-600 leading-relaxed">Working with the team to drill and assemble the mounting rails for the 6kW solar array at Regina Yego Girls Center.</p>
+                            </div>
+                        </div>
+
+                        <!-- Photo 2: Panels -->
+                        <div class="bg-[#f6faf8] rounded-xl overflow-hidden border border-gray-300/30 shadow-sm flex flex-col group hover:shadow-md transition-all duration-300">
+                            <div class="relative w-full aspect-[4/3] overflow-hidden bg-primary-dark">
+                                <img src="{% static 'images/solar_panels.jpg' %}" alt="Rooftop Panel Deployment" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500">
+                            </div>
+                            <div class="p-4 flex-grow">
+                                <h5 class="font-outfit text-xs font-bold text-primary-dark uppercase tracking-wider mb-1.5">Rooftop Panel Deployment</h5>
+                                <p class="font-inter text-xs text-gray-600 leading-relaxed">Working with the installation team to position and secure the 615W solar panels onto the roof of the Regina Yego Girls Center.</p>
+                            </div>
+                        </div>
+
+                        <!-- Photo 3: Team Spirit (Selfie) -->
+                        <div class="bg-[#f6faf8] rounded-xl overflow-hidden border border-gray-300/30 shadow-sm flex flex-col group hover:shadow-md transition-all duration-300">
+                            <div class="relative w-full aspect-[4/3] overflow-hidden bg-primary-dark">
+                                <img src="{% static 'images/solar_selfie.png' %}" alt="Team Spirit on the Roof" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500">
+                            </div>
+                            <div class="p-4 flex-grow">
+                                <h5 class="font-outfit text-xs font-bold text-primary-dark uppercase tracking-wider mb-1.5">Team Spirit on the Roof</h5>
+                                <p class="font-inter text-xs text-gray-600 leading-relaxed">A rooftop selfie with the installation team! Proudly representing the IEEE Moi University Student Branch after successfully deploying the solar panels.</p>
+                            </div>
+                        </div>
+
+                        <!-- Photo 4: Inverter -->
+                        <div class="bg-[#f6faf8] rounded-xl overflow-hidden border border-gray-300/30 shadow-sm flex flex-col group hover:shadow-md transition-all duration-300">
+                            <div class="relative w-full aspect-[4/3] overflow-hidden bg-primary-dark">
+                                <img src="{% static 'images/solar_inverter.png' %}" alt="Inverter Configuration" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500">
+                            </div>
+                            <div class="p-4 flex-grow">
+                                <h5 class="font-outfit text-xs font-bold text-primary-dark uppercase tracking-wider mb-1.5">Inverter Commissioning</h5>
+                                <p class="font-inter text-xs text-gray-600 leading-relaxed">Collaborating with the technical team to configure the operating parameters of the 6KW SRNE Inverter, ensuring stable power output.</p>
+                            </div>
+                        </div>
+
+                        <!-- Photo 5: Women in Eng -->
+                        <div class="bg-[#f6faf8] rounded-xl overflow-hidden border border-gray-300/30 shadow-sm flex flex-col group hover:shadow-md transition-all duration-300">
+                            <div class="relative w-full aspect-[4/3] overflow-hidden bg-primary-dark">
+                                <img src="{% static 'images/solar_women.png' %}" alt="IEEE Women in Engineering" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500">
+                            </div>
+                            <div class="p-4 flex-grow">
+                                <h5 class="font-outfit text-xs font-bold text-primary-dark uppercase tracking-wider mb-1.5">Women in Engineering</h5>
+                                <p class="font-inter text-xs text-gray-600 leading-relaxed">My brilliant female colleagues from the IEEE Moi University student branch who helped execute the solar installation. Their presence served as powerful inspiration.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% empty %}
+            <!-- Default mock project showcase -->
+            <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <div class="lg:col-span-6">
+                    <div class="relative w-full aspect-[16/10] bg-primary-dark rounded-2xl overflow-hidden border border-gray-300/40">
+                        <img src="{% static 'images/project_placeholder.png' %}" alt="Movie Review API" class="w-full h-full object-cover">
+                        <div class="absolute top-6 left-6 w-14 h-14 rounded-full bg-primary-dark border-2 border-primary-accent flex items-center justify-center text-white font-outfit font-black text-base shadow-md">01</div>
+                    </div>
+                </div>
+                <div class="lg:col-span-6 flex flex-col items-start text-left">
+                    <span class="font-outfit text-xs font-bold text-primary-green uppercase tracking-[0.2em] mb-2">REST API Architecture</span>
+                    <h3 class="font-outfit text-2xl sm:text-3xl font-black text-primary-dark leading-tight mb-4">Movie Review API</h3>
+                    <p class="font-inter text-sm sm:text-base text-gray-700 leading-relaxed mb-6">Comprehensive RESTful API for movie reviews, featuring secure JWT authentication, nested rating entities, full text search query optimization, and structured OpenAPI schema docs.</p>
+                    <div class="grid grid-cols-2 gap-4 w-full border-t border-gray-300/50 pt-4 mb-6">
                         <div>
-                            <h5 class="text-xs uppercase tracking-wider text-white/60 mb-3 font-semibold">Technologies Used</h5>
-                            <div class="flex flex-wrap gap-2">
+                            <span class="block text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">Tech Stack</span>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[10px] font-semibold px-2 py-0.5 bg-gray-200 text-gray-700 rounded">Django</span>
+                                <span class="text-[10px] font-semibold px-2 py-0.5 bg-gray-200 text-gray-700 rounded">DRF</span>
+                                <span class="text-[10px] font-semibold px-2 py-0.5 bg-gray-200 text-gray-700 rounded">PostgreSQL</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">Database Schema</span>
+                            <span class="text-xs text-primary-dark font-medium font-mono block truncate">PostgreSQL Models (Users, Reviews, Movies)</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="#" class="group flex items-center gap-2 bg-primary-dark hover:bg-primary-green text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300">
+                            <span>Live Demo</span>
+                            <span class="w-4.5 h-4.5 rounded-full bg-primary-accent text-primary-dark flex items-center justify-center font-bold text-[9px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
+                        </a>
+                        <a href="#" class="group flex items-center gap-2 bg-transparent border-2 border-primary-dark hover:bg-primary-dark hover:text-white px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-primary-dark transition-all duration-300">
+                            <span>GitHub Repo</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- View All Projects Button -->
+        <div class="text-center mt-20">
+            <a href="{% url 'portfolio:portfolio' %}" class="group inline-flex items-center gap-3 bg-primary-dark hover:bg-primary-green text-white px-10 py-5 rounded-full font-outfit font-bold text-sm tracking-wider uppercase transition-all duration-300 shadow-lg">
+                <span>View All Projects</span>
+                <span class="w-5 h-5 rounded-full bg-primary-accent text-primary-dark flex items-center justify-center font-bold text-[10px] group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- Experience Section -->
+<section id="experience" class="py-20 lg:py-32 bg-primary-dark text-white relative overflow-hidden border-t border-primary-green/30">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        
+        <!-- Section Header -->
+        <div class="grid lg:grid-cols-12 gap-6 mb-16 lg:mb-20 items-end">
+            <div class="lg:col-span-5 flex flex-col items-start">
+                <span class="font-outfit text-xs font-bold text-primary-accent uppercase tracking-[0.3em] mb-3">Timeline</span>
+                <h2 class="font-outfit text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
+                    Professional Experience History
+                </h2>
+            </div>
+            <div class="lg:col-span-7">
+                <p class="font-inter text-base text-primary-muted max-w-xl leading-relaxed">
+                    A summary of my engineering positions and core responsibilities, showing system performance achievements and project delivery.
+                </p>
+            </div>
+        </div>
+
+        <!-- Timeline Construction -->
+        <div class="relative max-w-4xl mx-auto">
+            <!-- Timeline Center Line -->
+            <div class="absolute left-4 sm:left-1/2 top-0 bottom-0 w-[2px] bg-primary-green/40"></div>
+
+            <div class="space-y-12">
+                {% for exp in experiences %}
+                <div class="relative flex flex-col sm:flex-row items-stretch">
+                    <!-- Dot Marker -->
+                    <div class="absolute left-4 sm:left-1/2 -translate-x-[7px] w-4 h-4 rounded-full bg-primary-accent border-4 border-primary-dark z-20 flex items-center justify-center">
+                    </div>
+
+                    <!-- Left side spacer/content -->
+                    <div class="w-full sm:w-1/2 pl-10 sm:pl-0 sm:pr-12 text-left sm:text-right {% if forloop.counter|divisibleby:2 %}sm:order-2 sm:pl-12 sm:pr-0 sm:text-left{% endif %}">
+                        <div class="bg-primary-green/60 border border-white/5 hover:border-primary-accent/40 rounded-2xl p-6 hover:bg-primary-green transition-all duration-300">
+                            <!-- Duration -->
+                            <span class="inline-block px-3 py-1 bg-primary-accent/10 border border-primary-accent/30 text-primary-accent text-[10px] font-bold tracking-widest uppercase rounded-full mb-3 font-mono">
+                                {{ exp.start_date|date:"M Y" }} - {% if exp.current %}Present{% else %}{{ exp.end_date|date:"M Y" }}{% endif %}
+                            </span>
+                            
+                            <h3 class="font-outfit text-xl font-bold text-white mb-1">{{ exp.position }}</h3>
+                            <h4 class="font-outfit text-sm font-semibold text-primary-accent/80 mb-4">{{ exp.company }}</h4>
+                            
+                            <p class="font-inter text-xs sm:text-sm text-primary-muted leading-relaxed mb-4">
+                                {{ exp.description }}
+                            </p>
+
+                            <!-- Tech tag loop -->
+                            <div class="flex flex-wrap gap-1.5 justify-start sm:justify-end {% if forloop.counter|divisibleby:2 %}sm:justify-start{% endif %}">
                                 {% for tech in exp.tech_used.split %}
-                                <span class="px-3 py-1.5 bg-primary-light/10 text-primary-light text-sm rounded border border-primary-light/20 hover:bg-primary-light/20 hover:scale-105 transition-all duration-200">
-                                    {{ tech }}
-                                </span>
+                                <span class="text-[9px] font-mono px-2 py-0.5 bg-primary-dark text-primary-muted border border-white/10 rounded">{{ tech }}</span>
                                 {% endfor %}
                             </div>
                         </div>
                     </div>
                 </div>
                 {% empty %}
-                <div class="lg:ml-20 bg-white/5 p-8 rounded-lg border border-white/10">
-                    <p class="text-gray-400 text-center font-inter">Experience data coming soon...</p>
+                <div class="text-center py-10 w-full text-primary-muted">
+                    <p>Work experience timeline is currently empty. Visit admin panel to manage experience history.</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
+
     </div>
 </section>
 
-<!-- Services Section - Redesigned with Numbered Cards -->
-<section id="services" class="relative min-h-screen bg-primary-light py-20 lg:py-32 overflow-hidden">
-    <div class="max-w-6xl mx-auto px-8 lg:px-20">
-        <!-- Section Header -->
-        <div class="mb-16">
-            <span class="text-primary-dark/10 font-montserrat font-bold text-[120px] lg:text-[180px] leading-none absolute top-0 left-0 lg:left-10" style="z-index: 0;">03</span>
-            <h2 class="relative text-5xl lg:text-7xl font-montserrat font-bold text-primary-dark mb-4 pt-20" style="z-index: 1;">What I Offer</h2>
-            <div class="w-24 h-1 bg-primary-dark"></div>
-            <p class="text-gray-700 text-lg mt-6 max-w-2xl font-inter">I help businesses launch, scale, and optimize their backend systems with clean, maintainable code and a focus on real-world results.</p>
-        </div>
-
-        <!-- Services Grid -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {% for service in services %}
-            <div class="group bg-white p-8 lg:p-10 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary-dark relative overflow-hidden">
-                <!-- Number Badge -->
-                <div class="absolute top-6 right-6 w-12 h-12 rounded-full bg-primary-dark/5 flex items-center justify-center group-hover:bg-primary-dark group-hover:scale-110 transition-all duration-300">
-                    <span class="text-primary-dark group-hover:text-white font-montserrat font-bold text-lg">{{ forloop.counter|stringformat:"02d" }}</span>
-                </div>
-                
-                <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-primary-dark mb-4 pr-14 group-hover:text-primary-dark/90 transition-colors">
-                    {{ service.title }}
-                </h3>
-                <p class="text-gray-700 leading-relaxed font-inter">{{ service.description }}</p>
-                
-                <!-- Decorative Element -->
-                <div class="mt-6 w-12 h-1 bg-primary-dark/20 group-hover:w-full group-hover:bg-primary-dark transition-all duration-500"></div>
-            </div>
-            {% empty %}
-            <!-- Default Services -->
-            <div class="group bg-white p-8 lg:p-10 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary-dark relative overflow-hidden">
-                <div class="absolute top-6 right-6 w-12 h-12 rounded-full bg-primary-dark/5 flex items-center justify-center group-hover:bg-primary-dark group-hover:scale-110 transition-all duration-300">
-                    <span class="text-primary-dark group-hover:text-white font-montserrat font-bold text-lg">01</span>
-                </div>
-                <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-primary-dark mb-4 pr-14 group-hover:text-primary-dark/90 transition-colors">
-                    API Development
-                </h3>
-                <p class="text-gray-700 leading-relaxed font-inter">Design and build RESTful APIs with Django REST Framework, implementing authentication, rate limiting, and comprehensive documentation.</p>
-                <div class="mt-6 w-12 h-1 bg-primary-dark/20 group-hover:w-full group-hover:bg-primary-dark transition-all duration-500"></div>
-            </div>
+<!-- Frequently Asked Questions -->
+<section id="faq" class="py-20 lg:py-32 bg-primary-dark text-white relative overflow-hidden border-t border-primary-green/30">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
             
-            <div class="group bg-white p-8 lg:p-10 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary-dark relative overflow-hidden">
-                <div class="absolute top-6 right-6 w-12 h-12 rounded-full bg-primary-dark/5 flex items-center justify-center group-hover:bg-primary-dark group-hover:scale-110 transition-all duration-300">
-                    <span class="text-primary-dark group-hover:text-white font-montserrat font-bold text-lg">02</span>
+            <!-- Left FAQ Promo Card -->
+            <div class="lg:col-span-4 bg-primary-green border border-white/5 rounded-2xl p-8 text-left">
+                <span class="font-outfit text-[10px] font-bold text-primary-accent uppercase tracking-[0.2em] mb-2 block">Help Center</span>
+                <h3 class="font-outfit text-2xl font-black text-white leading-tight mb-4">Frequently Asked Questions</h3>
+                <p class="font-inter text-sm text-primary-muted leading-relaxed mb-6">
+                    Have questions about backend operations, architecture styles, or service structures? Here are quick answers to typical queries.
+                </p>
+                <!-- Small design graphic mimicking image -->
+                <div class="mt-8 border-t border-white/10 pt-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-primary-dark border border-white/10 flex items-center justify-center text-primary-accent font-black text-sm font-outfit">VK</div>
+                        <div>
+                            <div class="text-xs font-bold text-white uppercase tracking-wider font-outfit">Victor Kalanza</div>
+                            <div class="text-[10px] text-primary-muted">Electrical Engineering Student</div>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-primary-dark mb-4 pr-14 group-hover:text-primary-dark/90 transition-colors">
-                    Database Optimization
-                </h3>
-                <p class="text-gray-700 leading-relaxed font-inter">Optimize PostgreSQL databases for performance, design efficient schemas, implement indexing strategies, and query optimization.</p>
-                <div class="mt-6 w-12 h-1 bg-primary-dark/20 group-hover:w-full group-hover:bg-primary-dark transition-all duration-500"></div>
             </div>
+
+            <!-- Right FAQ Accordions -->
+            <div class="lg:col-span-8 space-y-4">
+                
+                <!-- FAQ 1 -->
+                <div class="border border-white/10 rounded-xl bg-primary-green/20 overflow-hidden transition-all duration-300">
+                    <button class="w-full py-5 px-6 flex items-center justify-between text-left font-outfit font-bold text-base hover:text-primary-accent transition-colors" onclick="toggleFaq(this)">
+                        <span>What is your main programming language and core backend stack?</span>
+                        <span class="text-primary-accent text-lg select-none transition-transform duration-300">+</span>
+                    </button>
+                    <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-primary-dark/30">
+                        <p class="p-6 font-inter text-sm text-primary-muted leading-relaxed">
+                            My primary programming language is Python. My core framework stack is Django, Django REST Framework (DRF), and FastAPI. For storage and database systems, I work with PostgreSQL, Redis for cache/queues, and SQLite for development.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="border border-white/10 rounded-xl bg-primary-green/20 overflow-hidden transition-all duration-300">
+                    <button class="w-full py-5 px-6 flex items-center justify-between text-left font-outfit font-bold text-base hover:text-primary-accent transition-colors" onclick="toggleFaq(this)">
+                        <span>How do you handle API documentation?</span>
+                        <span class="text-primary-accent text-lg select-none transition-transform duration-300">+</span>
+                    </button>
+                    <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-primary-dark/30">
+                        <p class="p-6 font-inter text-sm text-primary-muted leading-relaxed">
+                            I ensure all APIs are fully documented following OpenAPI/Swagger specifications. Under FastAPI, documentation is generated automatically. In Django REST Framework, I utilize tools like drf-spectacular to output structured schema documents.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="border border-white/10 rounded-xl bg-primary-green/20 overflow-hidden transition-all duration-300">
+                    <button class="w-full py-5 px-6 flex items-center justify-between text-left font-outfit font-bold text-base hover:text-primary-accent transition-colors" onclick="toggleFaq(this)">
+                        <span>Do you write automated unit and integration tests?</span>
+                        <span class="text-primary-accent text-lg select-none transition-transform duration-300">+</span>
+                    </button>
+                    <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-primary-dark/30">
+                        <p class="p-6 font-inter text-sm text-primary-muted leading-relaxed">
+                            Yes, writing tests is a central part of my backend lifecycle. I write automated tests using Pytest or Django's built-in TestCase class. I focus on covering system routes, middleware performance, authentication layers, and schema validations.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="border border-white/10 rounded-xl bg-primary-green/20 overflow-hidden transition-all duration-300">
+                    <button class="w-full py-5 px-6 flex items-center justify-between text-left font-outfit font-bold text-base hover:text-primary-accent transition-colors" onclick="toggleFaq(this)">
+                        <span>Are you available for remote work or contract positions?</span>
+                        <span class="text-primary-accent text-lg select-none transition-transform duration-300">+</span>
+                    </button>
+                    <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-primary-dark/30">
+                        <p class="p-6 font-inter text-sm text-primary-muted leading-relaxed">
+                            Yes, I am fully open to junior-level backend developer roles, contract jobs, and open-source collaborations. I have experience collaborating with distributed teams remotely.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Banner -->
+<section class="py-16 md:py-24 bg-primary-accent text-primary-dark text-center relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#071714_1px,transparent_1px),linear-gradient(to_bottom,#071714_1px,transparent_1px)] bg-[size:30px_30px]" style="z-index: 1;"></div>
+    
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+        <span class="font-outfit text-xs font-bold uppercase tracking-[0.3em] mb-4 block text-primary-dark/60">Let's Collaborate</span>
+        <h2 class="font-outfit text-3xl sm:text-4xl md:text-5xl font-black mb-8 leading-tight text-primary-dark max-w-2xl mx-auto">
+            Ready to build high-performance backend systems?
+        </h2>
+        <a href="#contactme" class="group inline-flex items-center gap-3 bg-primary-dark hover:bg-primary-green text-white px-10 py-5 rounded-full font-outfit font-bold text-sm tracking-wider uppercase transition-all duration-300 shadow-md">
+            <span>Get in Touch</span>
+            <span class="w-5 h-5 rounded-full bg-primary-accent text-primary-dark flex items-center justify-center font-bold text-[10px] group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
+        </a>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contactme" class="py-20 lg:py-32 bg-primary-dark text-white relative overflow-hidden border-t border-primary-green/30">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
             
-            <div class="group bg-white p-8 lg:p-10 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary-dark relative overflow-hidden">
-                <div class="absolute top-6 right-6 w-12 h-12 rounded-full bg-primary-dark/5 flex items-center justify-center group-hover:bg-primary-dark group-hover:scale-110 transition-all duration-300">
-                    <span class="text-primary-dark group-hover:text-white font-montserrat font-bold text-lg">03</span>
+            <!-- Left Info Panel -->
+            <div class="lg:col-span-5 text-left">
+                <span class="font-outfit text-xs font-bold text-primary-accent uppercase tracking-[0.3em] mb-3 block">Get Connected</span>
+                <h2 class="font-outfit text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-6">
+                    Let's Build<br>Something Exceptional
+                </h2>
+                <div class="w-16 h-1 bg-primary-accent mb-8"></div>
+                <p class="font-inter text-sm sm:text-base text-primary-muted leading-relaxed mb-8 max-w-md">
+                    Looking for a backend developer who is dedicated to clean architecture, reliable testing, and performance? Feel free to reach out using the networks or direct email listed here.
+                </p>
+
+                <!-- Small quick details row -->
+                <div class="flex items-center gap-8 mb-8 border-t border-white/10 pt-8">
+                    <div>
+                        <div class="font-outfit text-xl font-bold text-white">24/7</div>
+                        <div class="font-inter text-[10px] text-primary-muted uppercase tracking-wider">Availability</div>
+                    </div>
+                    <div>
+                        <div class="font-outfit text-xl font-bold text-white">&lt;24h</div>
+                        <div class="font-inter text-[10px] text-primary-muted uppercase tracking-wider">Response Time</div>
+                    </div>
+                    <div>
+                        <div class="font-outfit text-xl font-bold text-white">100%</div>
+                        <div class="font-inter text-[10px] text-primary-muted uppercase tracking-wider">Remote Ready</div>
+                    </div>
                 </div>
-                <h3 class="text-2xl lg:text-3xl font-montserrat font-bold text-primary-dark mb-4 pr-14 group-hover:text-primary-dark/90 transition-colors">
-                    Cloud Deployment
-                </h3>
-                <p class="text-gray-700 leading-relaxed font-inter">Deploy scalable applications on AWS/GCP using Docker and Kubernetes, set up CI/CD pipelines, and ensure high availability.</p>
-                <div class="mt-6 w-12 h-1 bg-primary-dark/20 group-hover:w-full group-hover:bg-primary-dark transition-all duration-500"></div>
             </div>
-            {% endfor %}
+
+            <!-- Right Info Cards -->
+            <div class="lg:col-span-7 flex flex-col gap-4 max-w-xl lg:ml-auto w-full">
+                
+                <!-- Email contact card -->
+                <a href="mailto:kalanzavictor@gmail.com" class="group block bg-primary-green border border-white/5 hover:border-primary-accent/40 rounded-2xl p-6 transition-all duration-300">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-primary-dark text-primary-accent border border-white/10 flex items-center justify-center group-hover:bg-primary-accent group-hover:text-primary-dark transition-all duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-primary-muted uppercase tracking-widest font-bold">Email Address</span>
+                            <span class="text-base sm:text-lg font-outfit font-bold text-white break-all">kalanzavictor@gmail.com</span>
+                        </div>
+                        <span class="w-8 h-8 rounded-full bg-primary-dark text-primary-accent flex items-center justify-center font-bold text-[10px] ml-auto group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
+                    </div>
+                </a>
+
+                <!-- LinkedIn contact card -->
+                <a href="https://www.linkedin.com/in/victor-kalanza-a10a67261" target="_blank" class="group block bg-primary-green border border-white/5 hover:border-primary-accent/40 rounded-2xl p-6 transition-all duration-300">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-primary-dark text-primary-accent border border-white/10 flex items-center justify-center group-hover:bg-primary-accent group-hover:text-primary-dark transition-all duration-300">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-primary-muted uppercase tracking-widest font-bold">Professional Network</span>
+                            <span class="text-base sm:text-lg font-outfit font-bold text-white">LinkedIn Profile</span>
+                        </div>
+                        <span class="w-8 h-8 rounded-full bg-primary-dark text-primary-accent flex items-center justify-center font-bold text-[10px] ml-auto group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
+                    </div>
+                </a>
+
+                <!-- GitHub contact card -->
+                <a href="https://github.com/Kalanza" target="_blank" class="group block bg-primary-green border border-white/5 hover:border-primary-accent/40 rounded-2xl p-6 transition-all duration-300">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-primary-dark text-primary-accent border border-white/10 flex items-center justify-center group-hover:bg-primary-accent group-hover:text-primary-dark transition-all duration-300">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-primary-muted uppercase tracking-widest font-bold">Open Source</span>
+                            <span class="text-base sm:text-lg font-outfit font-bold text-white">GitHub Profile</span>
+                        </div>
+                        <span class="w-8 h-8 rounded-full bg-primary-dark text-primary-accent flex items-center justify-center font-bold text-[10px] ml-auto group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
+                    </div>
+                </a>
+
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Projects Section - Redesigned with Featured Layout -->
-<section id="projects" class="relative min-h-screen bg-white py-20 lg:py-32 overflow-hidden">
-    <div class="max-w-6xl mx-auto px-8 lg:px-20">
-        <!-- Section Header -->
-        <div class="mb-16">
-            <span class="text-gray-100 font-montserrat font-bold text-[120px] lg:text-[180px] leading-none absolute top-0 right-0 lg:right-10" style="z-index: 0;">04</span>
-            <h2 class="relative text-5xl lg:text-7xl font-montserrat font-bold text-primary-dark mb-4 pt-20" style="z-index: 1;">Featured Projects</h2>
-            <div class="w-24 h-1 bg-primary-dark"></div>
-            <p class="text-gray-700 text-lg mt-6 max-w-2xl font-inter">A selection of backend systems and APIs built with modern technologies.</p>
-        </div>
-
-        <!-- Projects Grid -->
-        <div class="space-y-8">
-            {% for project in projects %}
-            <!-- Alternating Layout -->
-            <div class="group bg-primary-dark rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 {% if forloop.counter|divisibleby:2 %}flex-row-reverse{% endif %}">
-                <div class="grid lg:grid-cols-2 gap-0">
-                    <!-- Project Image/Icon -->
-                    <div class="relative h-64 lg:h-auto overflow-hidden {% if forloop.counter|divisibleby:2 %}lg:order-2{% endif %}">
-                        {% if project.image %}
-                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        {% else %}
-                        <div class="w-full h-full bg-gradient-to-br from-primary-light to-primary-light/80 flex items-center justify-center relative overflow-hidden">
-                            <div class="absolute inset-0 opacity-10">
-                                <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(14,22,33,.2)_25%,rgba(14,22,33,.2)_50%,transparent_50%,transparent_75%,rgba(14,22,33,.2)_75%,rgba(14,22,33,.2))] bg-[length:20px_20px]"></div>
-                            </div>
-                            <span class="text-primary-dark text-8xl font-montserrat font-bold relative z-10">{{ project.title|slice:":1" }}</span>
-                        </div>
-                        {% endif %}
-                        <!-- Project Number Badge -->
-                        <div class="absolute top-6 left-6 w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
-                            <span class="text-primary-dark font-montserrat font-bold text-xl">{{ forloop.counter|stringformat:"02d" }}</span>
-                        </div>
+<!-- Footer -->
+<footer class="py-16 bg-primary-dark border-t border-primary-green/30 text-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="grid md:grid-cols-12 gap-8 items-start mb-12">
+            <!-- Left Info -->
+            <div class="md:col-span-6 flex flex-col items-start text-left">
+                <a href="#home" class="flex items-center gap-2 group mb-6">
+                    <div class="relative w-8 h-8 flex items-center justify-center">
+                        <div class="absolute inset-0 border border-primary-accent rounded-sm group-hover:rotate-12 transition-transform duration-300"></div>
+                        <span class="font-outfit font-black text-white text-xs tracking-tighter">VK</span>
                     </div>
-                    
-                    <!-- Project Content -->
-                    <div class="p-8 lg:p-12 flex flex-col justify-center {% if forloop.counter|divisibleby:2 %}lg:order-1{% endif %}">
-                        <h3 class="text-3xl lg:text-4xl font-montserrat font-bold text-white mb-4 group-hover:text-primary-light transition-colors">
-                            {{ project.title }}
-                        </h3>
-                        <p class="text-white/80 leading-relaxed mb-6 font-inter">{{ project.description }}</p>
-                        
-                        <!-- Tech Stack Tags -->
-                        <div class="mb-6">
-                            <div class="flex flex-wrap gap-2">
-                                {% for tech in project.tech_stack|split:"," %}
-                                <span class="px-3 py-1 bg-white/10 text-white text-sm rounded-full border border-white/20 font-inter">{{ tech|trim }}</span>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        
-                        <!-- Project Links -->
-                        <div class="flex gap-4">
-                            {% if project.api_documentation %}
-                            <a href="{{ project.api_documentation }}" target="_blank" class="inline-flex items-center gap-2 bg-primary-light text-primary-dark px-6 py-3 rounded-lg font-semibold hover:bg-white transition-all duration-300 group/btn">
-                                <span>Live Demo</span>
-                                <svg class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                                </svg>
-                            </a>
-                            {% endif %}
-                            {% if project.github_link %}
-                            <a href="{{ project.github_link }}" target="_blank" class="inline-flex items-center gap-2 border-2 border-white/30 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-dark transition-all duration-300">
-                                <span>GitHub</span>
-                            </a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            <!-- Default Projects -->
-            <div class="group bg-primary-dark rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500">
-                <div class="grid lg:grid-cols-2 gap-0">
-                    <div class="relative h-64 lg:h-auto overflow-hidden">
-                        <div class="w-full h-full bg-gradient-to-br from-primary-light to-primary-light/80 flex items-center justify-center relative overflow-hidden">
-                            <div class="absolute inset-0 opacity-10">
-                                <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(14,22,33,.2)_25%,rgba(14,22,33,.2)_50%,transparent_50%,transparent_75%,rgba(14,22,33,.2)_75%,rgba(14,22,33,.2))] bg-[length:20px_20px]"></div>
-                            </div>
-                            <span class="text-primary-dark text-8xl font-montserrat font-bold relative z-10">M</span>
-                        </div>
-                        <div class="absolute top-6 left-6 w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
-                            <span class="text-primary-dark font-montserrat font-bold text-xl">01</span>
-                        </div>
-                    </div>
-                    <div class="p-8 lg:p-12 flex flex-col justify-center">
-                        <h3 class="text-3xl lg:text-4xl font-montserrat font-bold text-white mb-4 group-hover:text-primary-light transition-colors">
-                            Movie Review API
-                        </h3>
-                        <p class="text-white/80 leading-relaxed mb-6 font-inter">Comprehensive RESTful API for movie reviews with user authentication, rating system, and advanced search functionality.</p>
-                        <div class="mb-6">
-                            <div class="flex flex-wrap gap-2">
-                                <span class="px-3 py-1 bg-white/10 text-white text-sm rounded-full border border-white/20 font-inter">Django</span>
-                                <span class="px-3 py-1 bg-white/10 text-white text-sm rounded-full border border-white/20 font-inter">DRF</span>
-                                <span class="px-3 py-1 bg-white/10 text-white text-sm rounded-full border border-white/20 font-inter">PostgreSQL</span>
-                                <span class="px-3 py-1 bg-white/10 text-white text-sm rounded-full border border-white/20 font-inter">JWT</span>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <a href="#" target="_blank" class="inline-flex items-center gap-2 bg-primary-light text-primary-dark px-6 py-3 rounded-lg font-semibold hover:bg-white transition-all duration-300 group/btn">
-                                <span>Live Demo</span>
-                                <svg class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                                </svg>
-                            </a>
-                            <a href="#" target="_blank" class="inline-flex items-center gap-2 border-2 border-white/30 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-dark transition-all duration-300">
-                                <span>GitHub</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        
-        <!-- View All Button -->
-        <div class="text-center mt-16">
-            <a href="{% url 'portfolio:portfolio' %}" class="inline-flex items-center gap-3 bg-primary-dark text-white px-10 py-5 rounded-lg font-montserrat font-bold text-lg hover:bg-primary-dark/90 hover:scale-105 transition-all duration-300 shadow-lg">
-                <span>VIEW ALL PROJECTS</span>
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Section - Redesigned with Split Background -->
-<section id="contactme" class="relative min-h-screen overflow-hidden">
-    <!-- Gradient Background -->
-    <div class="absolute inset-0 w-full h-full" style="z-index: 0; background: linear-gradient(135deg, #c79a6c 0%, #0e1621 100%);"></div>
-
-    <div class="relative py-8 sm:py-12 md:py-16 lg:py-24 px-2 sm:px-4 md:px-6 lg:px-20" style="z-index: 10;">
-        <div class="max-w-3xl sm:max-w-4xl md:max-w-5xl lg:max-w-6xl mx-auto md:ml-0 lg:ml-[120px]">
-            <!-- Editorial Number -->
-            <span class="hidden sm:block text-primary-dark/20 font-montserrat font-bold text-[60px] md:text-[100px] lg:text-[180px] leading-none absolute top-0 left-0 lg:left-10">05</span>
-            <div class="relative flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-20 items-center">
-                <!-- Left Content -->
-                <div class="w-full lg:w-1/2 text-center lg:text-left">
-                    <h2 class="relative text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-montserrat font-bold text-primary-dark mb-4 pt-8 sm:pt-12 lg:pt-20">
-                        Let's Build<br/>Together
-                    </h2>
-                    <div class="w-16 sm:w-24 h-1 bg-primary-dark mx-auto lg:mx-0 mb-6 sm:mb-8"></div>
-                    <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed font-inter mb-6 sm:mb-8 lg:mb-12">
-                        Open to backend development opportunities and collaborations. Let's create something exceptional.
-                    </p>
-                    <!-- Quick Stats -->
-                    <div class="flex flex-row justify-center lg:justify-start gap-4 mb-8 sm:mb-10 lg:mb-12">
-                        <div class="text-center">
-                            <div class="text-2xl sm:text-3xl md:text-4xl font-montserrat font-bold text-primary-dark mb-1">24/7</div>
-                            <div class="text-xs sm:text-sm text-gray-600 font-inter">Available</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-2xl sm:text-3xl md:text-4xl font-montserrat font-bold text-primary-dark mb-1">&lt;24h</div>
-                            <div class="text-xs sm:text-sm text-gray-600 font-inter">Response</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-2xl sm:text-3xl md:text-4xl font-montserrat font-bold text-primary-dark mb-1">100%</div>
-                            <div class="text-xs sm:text-sm text-gray-600 font-inter">Remote</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Right Content - Contact Cards -->
-                <div class="w-full lg:w-1/2 flex flex-col gap-4">
-                    <!-- Email Card -->
-                    <a href="mailto:kalanzavictor@gmail.com" class="group block bg-primary-dark p-4 sm:p-6 md:p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-light">
-                        <div class="flex flex-col sm:flex-row items-center gap-3 md:gap-4 mb-3">
-                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary-light flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-2 sm:mb-0">
-                                <svg class="w-7 h-7 text-primary-dark" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-                                </svg>
-                            </div>
-                            <div class="flex-1 text-center sm:text-left">
-                                <div class="text-primary-light text-sm font-inter mb-1">Email Address</div>
-                                <div class="text-white text-lg font-montserrat font-semibold break-all">kalanzavictor@gmail.com</div>
-                            </div>
-                            <svg class="hidden sm:block w-6 h-6 text-primary-light group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
-                        </div>
-                        <p class="text-white/70 text-sm font-inter">Drop me a message about your project</p>
-                    </a>
-                    <!-- LinkedIn Card -->
-                    <a href="https://www.linkedin.com/in/victor-kalanza-a10a67261" target="_blank" class="group block bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-dark">
-                        <div class="flex flex-col sm:flex-row items-center gap-3 md:gap-4 mb-3">
-                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary-dark flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-2 sm:mb-0">
-                                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                                </svg>
-                            </div>
-                            <div class="flex-1 text-center sm:text-left">
-                                <div class="text-gray-600 text-sm font-inter mb-1">Professional Network</div>
-                                <div class="text-primary-dark text-lg font-montserrat font-semibold">LinkedIn Profile</div>
-                            </div>
-                            <svg class="hidden sm:block w-6 h-6 text-primary-dark group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
-                        </div>
-                        <p class="text-gray-600 text-sm font-inter">Let's connect professionally</p>
-                    </a>
-                    <!-- GitHub Card -->
-                    <a href="https://github.com/Kalanza" target="_blank" class="group block bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-primary-dark">
-                        <div class="flex flex-col sm:flex-row items-center gap-3 md:gap-4 mb-3">
-                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary-dark flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-2 sm:mb-0">
-                                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
-                                </svg>
-                            </div>
-                            <div class="flex-1 text-center sm:text-left">
-                                <div class="text-gray-600 text-sm font-inter mb-1">Open Source</div>
-                                <div class="text-primary-dark text-lg font-montserrat font-semibold">GitHub Profile</div>
-                            </div>
-                            <svg class="hidden sm:block w-6 h-6 text-primary-dark group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
-                        </div>
-                        <p class="text-gray-600 text-sm font-inter">Check out my code repositories</p>
-                    </a>
-                </div>
-            </div>
-            <!-- Footer -->
-            <div class="mt-12 pt-8 border-t border-primary-dark/20 text-center">
-                <p class="text-gray-600 text-sm font-inter">
-                    © 2025 Victor Mumo Kalanza. Built with Django & Tailwind CSS.
+                    <span class="font-outfit font-bold text-sm tracking-wider text-white uppercase">Kalanza</span>
+                </a>
+                <p class="font-inter text-xs text-primary-muted leading-relaxed max-w-sm">
+                    Designing and engineering high-availability backend microservices, robust API specifications, and optimized database storage strategies.
                 </p>
             </div>
+
+            <!-- Right Links Column -->
+            <div class="md:col-span-6 grid grid-cols-2 gap-8 md:text-right">
+                <div class="text-left md:text-right">
+                    <h4 class="font-outfit text-xs font-bold uppercase tracking-widest text-primary-accent mb-4">Navigation</h4>
+                    <ul class="space-y-2 text-xs text-primary-muted font-inter">
+                        <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#pillars" class="hover:text-white transition-colors">Core Pillars</a></li>
+                        <li><a href="#aboutme" class="hover:text-white transition-colors">About Me</a></li>
+                        <li><a href="#projects" class="hover:text-white transition-colors">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="text-left md:text-right">
+                    <h4 class="font-outfit text-xs font-bold uppercase tracking-widest text-primary-accent mb-4">Contact & Socials</h4>
+                    <ul class="space-y-2 text-xs text-primary-muted font-inter">
+                        <li><a href="mailto:kalanzavictor@gmail.com" class="hover:text-white transition-colors">Direct Email</a></li>
+                        <li><a href="https://github.com/Kalanza" target="_blank" class="hover:text-white transition-colors">GitHub</a></li>
+                        <li><a href="https://www.linkedin.com/in/victor-kalanza-a10a67261" target="_blank" class="hover:text-white transition-colors">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider line -->
+        <div class="border-t border-primary-green/30 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-primary-muted font-inter">
+            <p>© 2026 Victor Mumo Kalanza. All Rights Reserved.</p>
+            <p>Designed and built with Django & Tailwind CSS.</p>
         </div>
     </div>
-</section>
+</footer>
 
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    // Smooth scroll for navigation links
+    // Toggle accordion FAQs
+    function toggleFaq(button) {
+        const accordion = button.parentElement;
+        const answer = button.nextElementSibling;
+        const symbol = button.querySelector('span:last-child');
+        
+        // Check if currently open
+        const isOpen = accordion.classList.contains('border-primary-accent/40');
+        
+        // Close all other accordions first
+        document.querySelectorAll('#faq > div > div').forEach(item => {
+            item.classList.remove('border-primary-accent/40');
+            item.classList.add('border-white/10');
+            item.querySelector('div').style.maxHeight = null;
+            item.querySelector('button span:last-child').textContent = '+';
+        });
+        
+        if (!isOpen) {
+            // Open this accordion
+            accordion.classList.remove('border-white/10');
+            accordion.classList.add('border-primary-accent/40');
+            answer.style.maxHeight = answer.scrollHeight + "px";
+            symbol.textContent = '−';
+        }
+    }
+
+    // Smooth scroll for nav anchors
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
                 });
             }
         });
-    });
-
-    // Intersection Observer for fade-in animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    // Observe all sections
-    document.querySelectorAll('section').forEach(section => {
-        observer.observe(section);
     });
 </script>
 {% endblock %}
